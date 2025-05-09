@@ -1,0 +1,37 @@
+{
+    "UUID": "136e224ff9848e53c33322f58d58f1b3",
+    "stems": {
+        "S00": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "euphonium"
+        },
+        "S01": {
+            "original_inst_class": "Bass",
+            "assigned_instrument": "tuba"
+        },
+        "S02": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "trombone"
+        },
+        "S03": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "tuba"
+        },
+        "S04": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "euphonium"
+        },
+        "S06": {
+            "original_inst_class": "Drums",
+            "assigned_instrument": "Drums"
+        },
+        "S07": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "trombone"
+        },
+        "S08": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "trombone"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "pitch_class": 0,
+    "octave": 5,
+    "duration": 1.0,
+    "position": 0.0
+  },
+  {
+    "pitch_class": 2,
+    "octave": 5,
+    "duration": 0.5,
+    "position": 1.0
+  },
+  {
+    "pitch_class": 7,
+    "octave": 4,
+    "duration": 1.0,
+    "position": 2.0
+  },
+  {
+    "pitch_class": 5,
+    "octave": 4,
+    "duration": 0.75,
+    "position": 3.0
+  },
+  {
+    "pitch_class": 9,
+    "octave": 3,
+    "duration": 1.5,
+    "position": 4.0
+  }
+]

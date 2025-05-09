@@ -1,0 +1,136 @@
+[
+  [
+    {
+      "pitch_class": 9,
+      "octave": 6,
+      "duration": 1.58333,
+      "position": 34.05
+    },
+    {
+      "pitch_class": 1,
+      "octave": 7,
+      "duration": 1.61667,
+      "position": 35.61667
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 1.61667,
+      "position": 37.18333
+    },
+    {
+      "pitch_class": 6,
+      "octave": 7,
+      "duration": 1.6,
+      "position": 38.75
+    },
+    {
+      "pitch_class": 4,
+      "octave": 7,
+      "duration": 3.16667,
+      "position": 40.31667
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 4.25,
+      "position": 43.45
+    },
+    {
+      "pitch_class": 1,
+      "octave": 7,
+      "duration": 2.83333,
+      "position": 48.15
+    },
+    {
+      "pitch_class": 4,
+      "octave": 7,
+      "duration": 3.96667,
+      "position": 51.28333
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.86667,
+      "position": 55.18333
+    },
+    {
+      "pitch_class": 6,
+      "octave": 7,
+      "duration": 3.18333,
+      "position": 55.96667
+    },
+    {
+      "pitch_class": 4,
+      "octave": 7,
+      "duration": 4.25,
+      "position": 59.1
+    },
+    {
+      "pitch_class": 9,
+      "octave": 6,
+      "duration": 1.58333,
+      "position": 110.76667
+    },
+    {
+      "pitch_class": 1,
+      "octave": 7,
+      "duration": 1.63333,
+      "position": 112.31667
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 1.63333,
+      "position": 113.88333
+    },
+    {
+      "pitch_class": 6,
+      "octave": 7,
+      "duration": 1.61667,
+      "position": 115.45
+    },
+    {
+      "pitch_class": 4,
+      "octave": 7,
+      "duration": 3.16667,
+      "position": 117.01667
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 4.25,
+      "position": 120.15
+    },
+    {
+      "pitch_class": 1,
+      "octave": 7,
+      "duration": 2.83333,
+      "position": 124.85
+    },
+    {
+      "pitch_class": 4,
+      "octave": 7,
+      "duration": 3.96667,
+      "position": 127.98333
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.86667,
+      "position": 131.9
+    },
+    {
+      "pitch_class": 6,
+      "octave": 7,
+      "duration": 3.18333,
+      "position": 132.68333
+    },
+    {
+      "pitch_class": 4,
+      "octave": 7,
+      "duration": 4.25,
+      "position": 135.8
+    }
+  ]
+]

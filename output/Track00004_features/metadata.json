@@ -1,0 +1,41 @@
+{
+    "UUID": "c613ddce3ded35d2e8cadf3511a1ffb9",
+    "stems": {
+        "S00": {
+            "original_inst_class": "Synth Pad",
+            "assigned_instrument": "euphonium"
+        },
+        "S01": {
+            "original_inst_class": "Bass",
+            "assigned_instrument": "tuba"
+        },
+        "S02": {
+            "original_inst_class": "Strings (continued)",
+            "assigned_instrument": "trumpet"
+        },
+        "S03": {
+            "original_inst_class": "Organ",
+            "assigned_instrument": "trumpet"
+        },
+        "S04": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "tuba"
+        },
+        "S05": {
+            "original_inst_class": "Strings (continued)",
+            "assigned_instrument": "trumpet"
+        },
+        "S06": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "french_horn"
+        },
+        "S07": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "tuba"
+        },
+        "S08": {
+            "original_inst_class": "Drums",
+            "assigned_instrument": "Drums"
+        }
+    }
+}

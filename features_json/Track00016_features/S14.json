@@ -1,0 +1,16 @@
+{
+    "min_pitch": 67,
+    "max_pitch": 68,
+    "avg_pitch": 67.5,
+    "avg_duration": 3.5345614583333287,
+    "avg_position": 189.91365583333334,
+    "note_density": 0.010117020690763742,
+    "pitch_classes": [
+        8,
+        7
+    ],
+    "octaves": [
+        5,
+        5
+    ]
+}

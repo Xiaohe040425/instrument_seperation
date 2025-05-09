@@ -1,0 +1,214 @@
+[
+  [
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 23.30096,
+      "position": 4.66019
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.31796,
+      "position": 27.96115
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.34223,
+      "position": 30.28518
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 4.69053,
+      "position": 32.61528
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.34223,
+      "position": 37.27547
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.3665,
+      "position": 39.60556
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 4.66626,
+      "position": 41.93566
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.29976,
+      "position": 46.60192
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.33616,
+      "position": 48.92595
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 4.65412,
+      "position": 51.26211
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.36044,
+      "position": 55.91624
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.33616,
+      "position": 58.24633
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 4.59951,
+      "position": 60.5825
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.33616,
+      "position": 65.23662
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.33616,
+      "position": 67.56672
+    },
+    {
+      "pitch_class": 4,
+      "octave": 3,
+      "duration": 4.68446,
+      "position": 69.89681
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.37257,
+      "position": 74.557
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 2.35437,
+      "position": 76.8871
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 4.66019,
+      "position": 107.18442
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.31796,
+      "position": 111.84461
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.34223,
+      "position": 114.16864
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 4.69053,
+      "position": 116.49873
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.34223,
+      "position": 121.15892
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.3665,
+      "position": 123.48902
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 4.66626,
+      "position": 125.81912
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.29976,
+      "position": 130.48538
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.33616,
+      "position": 132.8094
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 4.65412,
+      "position": 135.14557
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.36044,
+      "position": 139.79969
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.33616,
+      "position": 142.12979
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 4.59951,
+      "position": 144.46595
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.33616,
+      "position": 149.12008
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 2.33616,
+      "position": 151.45017
+    },
+    {
+      "pitch_class": 4,
+      "octave": 3,
+      "duration": 4.68446,
+      "position": 153.78027
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 2.33616,
+      "position": 158.44046
+    }
+  ]
+]
