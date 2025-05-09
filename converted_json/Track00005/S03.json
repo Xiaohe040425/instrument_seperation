@@ -1,0 +1,40 @@
+[
+  [
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.81368,
+      "position": 2.26415
+    },
+    {
+      "pitch_class": 4,
+      "octave": 7,
+      "duration": 1.36203,
+      "position": 3.11321
+    },
+    {
+      "pitch_class": 11,
+      "octave": 6,
+      "duration": 0.77241,
+      "position": 4.5342
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 1.32665,
+      "position": 5.38326
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.84316,
+      "position": 6.79835
+    },
+    {
+      "pitch_class": 4,
+      "octave": 7,
+      "duration": 2.3526,
+      "position": 7.64741
+    }
+  ]
+]

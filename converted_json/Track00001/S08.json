@@ -1,0 +1,784 @@
+[
+  [
+    {
+      "pitch_class": 5,
+      "octave": 6,
+      "duration": 0.98425,
+      "position": 22.54405
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 1.00769,
+      "position": 22.54405
+    },
+    {
+      "pitch_class": 4,
+      "octave": 7,
+      "duration": 0.30465,
+      "position": 23.50487
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.28903,
+      "position": 23.73921
+    },
+    {
+      "pitch_class": 4,
+      "octave": 5,
+      "duration": 2.3044,
+      "position": 23.94231
+    },
+    {
+      "pitch_class": 0,
+      "octave": 5,
+      "duration": 2.40595,
+      "position": 23.95012
+    },
+    {
+      "pitch_class": 0,
+      "octave": 7,
+      "duration": 0.23435,
+      "position": 23.98137
+    },
+    {
+      "pitch_class": 11,
+      "octave": 4,
+      "duration": 0.14061,
+      "position": 26.29358
+    },
+    {
+      "pitch_class": 9,
+      "octave": 4,
+      "duration": 0.07812,
+      "position": 26.42637
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.0703,
+      "position": 26.50449
+    },
+    {
+      "pitch_class": 5,
+      "octave": 4,
+      "duration": 0.04687,
+      "position": 26.59042
+    },
+    {
+      "pitch_class": 4,
+      "octave": 4,
+      "duration": 0.03906,
+      "position": 26.66072
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.0703,
+      "position": 26.70759
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.0703,
+      "position": 96.23794
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.0703,
+      "position": 96.23794
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.08593,
+      "position": 96.23794
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.03906,
+      "position": 96.48791
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.05468,
+      "position": 96.48791
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.04687,
+      "position": 96.73787
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 96.73787
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.06249,
+      "position": 96.73787
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.03125,
+      "position": 96.98784
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.03906,
+      "position": 96.98784
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.04687,
+      "position": 97.23781
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.04687,
+      "position": 97.23781
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.62492,
+      "position": 97.48778
+    },
+    {
+      "pitch_class": 5,
+      "octave": 4,
+      "duration": 0.68741,
+      "position": 97.48778
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.68741,
+      "position": 98.23769
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.69523,
+      "position": 98.23769
+    },
+    {
+      "pitch_class": 9,
+      "octave": 3,
+      "duration": 0.74209,
+      "position": 98.98759
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.74209,
+      "position": 98.98759
+    },
+    {
+      "pitch_class": 9,
+      "octave": 4,
+      "duration": 0.74991,
+      "position": 98.98759
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.28903,
+      "position": 105.73675
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.30465,
+      "position": 105.73675
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 0.31246,
+      "position": 105.73675
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.08593,
+      "position": 108.23643
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.10155,
+      "position": 108.23643
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.11717,
+      "position": 108.23643
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.03906,
+      "position": 108.4864
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 108.4864
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.06249,
+      "position": 108.4864
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 108.73637
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.06249,
+      "position": 108.73637
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.0703,
+      "position": 108.73637
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.04687,
+      "position": 108.98634
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 108.98634
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.06249,
+      "position": 108.98634
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.04687,
+      "position": 109.23631
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 109.23631
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.06249,
+      "position": 109.23631
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.56243,
+      "position": 109.48628
+    },
+    {
+      "pitch_class": 5,
+      "octave": 4,
+      "duration": 0.6093,
+      "position": 109.48628
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.57805,
+      "position": 110.23618
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.72647,
+      "position": 110.23618
+    },
+    {
+      "pitch_class": 9,
+      "octave": 3,
+      "duration": 0.87489,
+      "position": 110.98609
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.92176,
+      "position": 110.98609
+    },
+    {
+      "pitch_class": 9,
+      "octave": 4,
+      "duration": 0.93738,
+      "position": 110.98609
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 0.3359,
+      "position": 114.77468
+    },
+    {
+      "pitch_class": 5,
+      "octave": 4,
+      "duration": 0.31246,
+      "position": 114.78249
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.32808,
+      "position": 114.78249
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.28903,
+      "position": 117.76649
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.29684,
+      "position": 117.76649
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 0.28121,
+      "position": 117.78211
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.42182,
+      "position": 120.71924
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.41401,
+      "position": 120.72705
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.38276,
+      "position": 120.73487
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.68741,
+      "position": 121.22699
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.67179,
+      "position": 121.24261
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.73428,
+      "position": 121.24261
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.15623,
+      "position": 176.97782
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.15623,
+      "position": 176.97782
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.15623,
+      "position": 176.97782
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.0703,
+      "position": 177.21216
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.07812,
+      "position": 177.21216
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.03906,
+      "position": 177.2356
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 177.45432
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.04687,
+      "position": 177.46213
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.06249,
+      "position": 177.7121
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.06249,
+      "position": 177.7121
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 177.71991
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 177.93863
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.04687,
+      "position": 177.94644
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.04687,
+      "position": 177.94644
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 178.15736
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.05468,
+      "position": 178.16517
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.03125,
+      "position": 178.17298
+    },
+    {
+      "pitch_class": 5,
+      "octave": 4,
+      "duration": 0.52337,
+      "position": 178.47763
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.48431,
+      "position": 178.48544
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.82021,
+      "position": 179.19629
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.77334,
+      "position": 179.2041
+    },
+    {
+      "pitch_class": 4,
+      "octave": 4,
+      "duration": 0.75772,
+      "position": 180.00087
+    },
+    {
+      "pitch_class": 9,
+      "octave": 4,
+      "duration": 0.75772,
+      "position": 180.00087
+    },
+    {
+      "pitch_class": 9,
+      "octave": 3,
+      "duration": 0.75772,
+      "position": 180.0165
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.28903,
+      "position": 186.72659
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.30465,
+      "position": 186.72659
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 0.31246,
+      "position": 186.72659
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.08593,
+      "position": 189.22628
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.10155,
+      "position": 189.22628
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.11717,
+      "position": 189.22628
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.03906,
+      "position": 189.47625
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 189.47625
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.06249,
+      "position": 189.47625
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 189.72622
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.06249,
+      "position": 189.72622
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.0703,
+      "position": 189.72622
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.04687,
+      "position": 189.97619
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 189.97619
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.06249,
+      "position": 189.97619
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.04687,
+      "position": 190.22616
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.05468,
+      "position": 190.22616
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.06249,
+      "position": 190.22616
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.56243,
+      "position": 190.47612
+    },
+    {
+      "pitch_class": 5,
+      "octave": 4,
+      "duration": 0.6093,
+      "position": 190.47612
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.57805,
+      "position": 191.22603
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.72647,
+      "position": 191.22603
+    },
+    {
+      "pitch_class": 9,
+      "octave": 3,
+      "duration": 0.87489,
+      "position": 191.97594
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.92176,
+      "position": 191.97594
+    },
+    {
+      "pitch_class": 9,
+      "octave": 4,
+      "duration": 0.93738,
+      "position": 191.97594
+    },
+    {
+      "pitch_class": 5,
+      "octave": 3,
+      "duration": 0.3359,
+      "position": 195.76452
+    },
+    {
+      "pitch_class": 5,
+      "octave": 4,
+      "duration": 0.31246,
+      "position": 195.77234
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.32808,
+      "position": 195.77234
+    },
+    {
+      "pitch_class": 0,
+      "octave": 4,
+      "duration": 0.28903,
+      "position": 198.75634
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.29684,
+      "position": 198.75634
+    },
+    {
+      "pitch_class": 0,
+      "octave": 3,
+      "duration": 0.28121,
+      "position": 198.77196
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.42182,
+      "position": 201.70909
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.41401,
+      "position": 201.7169
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.38276,
+      "position": 201.72471
+    },
+    {
+      "pitch_class": 2,
+      "octave": 4,
+      "duration": 0.68741,
+      "position": 202.21684
+    },
+    {
+      "pitch_class": 7,
+      "octave": 4,
+      "duration": 0.67179,
+      "position": 202.23246
+    },
+    {
+      "pitch_class": 7,
+      "octave": 3,
+      "duration": 0.73428,
+      "position": 202.23246
+    }
+  ]
+]

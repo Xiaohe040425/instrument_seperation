@@ -1,0 +1,28 @@
+[
+  [
+    {
+      "pitch_class": 8,
+      "octave": 5,
+      "duration": 2.92777,
+      "position": 179.4374
+    },
+    {
+      "pitch_class": 3,
+      "octave": 5,
+      "duration": 0.64017,
+      "position": 182.33786
+    },
+    {
+      "pitch_class": 7,
+      "octave": 5,
+      "duration": 0.62196,
+      "position": 182.90825
+    },
+    {
+      "pitch_class": 3,
+      "octave": 5,
+      "duration": 5.21234,
+      "position": 183.50897
+    }
+  ]
+]

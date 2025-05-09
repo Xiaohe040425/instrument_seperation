@@ -1,0 +1,724 @@
+[
+  [
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.5125,
+      "position": 40.32
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.555,
+      "position": 40.32
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.6025,
+      "position": 40.8
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.6675,
+      "position": 41.28
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.6825,
+      "position": 41.28
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.6025,
+      "position": 41.76
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.56,
+      "position": 42.24
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.5725,
+      "position": 42.24
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.58,
+      "position": 42.72
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.5175,
+      "position": 43.2
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.535,
+      "position": 43.2
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.525,
+      "position": 43.68
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.52,
+      "position": 44.16
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.53,
+      "position": 44.16
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.575,
+      "position": 44.64
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.505,
+      "position": 45.12
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.5075,
+      "position": 45.12
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.515,
+      "position": 45.6
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.55,
+      "position": 46.08
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.5975,
+      "position": 46.56
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.485,
+      "position": 47.04
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.56,
+      "position": 47.04
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.515,
+      "position": 47.52
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.24,
+      "position": 48.0
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.55,
+      "position": 48.0
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.5625,
+      "position": 48.0
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.5375,
+      "position": 48.48
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.48,
+      "position": 48.96
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.495,
+      "position": 48.96
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.485,
+      "position": 49.44
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.5025,
+      "position": 49.92
+    },
+    {
+      "pitch_class": 0,
+      "octave": 7,
+      "duration": 0.64,
+      "position": 49.92
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.565,
+      "position": 50.4
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.535,
+      "position": 50.88
+    },
+    {
+      "pitch_class": 0,
+      "octave": 7,
+      "duration": 0.5425,
+      "position": 50.88
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.49,
+      "position": 51.36
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.37,
+      "position": 51.84
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.8525,
+      "position": 51.84
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.86,
+      "position": 51.84
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.895,
+      "position": 52.32
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.8925,
+      "position": 52.8
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.945,
+      "position": 52.8
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.3825,
+      "position": 53.28
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.3625,
+      "position": 53.76
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.8425,
+      "position": 53.76
+    },
+    {
+      "pitch_class": 6,
+      "octave": 7,
+      "duration": 0.85,
+      "position": 53.76
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.88,
+      "position": 54.24
+    },
+    {
+      "pitch_class": 6,
+      "octave": 7,
+      "duration": 0.6075,
+      "position": 54.72
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.815,
+      "position": 54.72
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.35,
+      "position": 55.2
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.415,
+      "position": 55.68
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.9025,
+      "position": 55.68
+    },
+    {
+      "pitch_class": 11,
+      "octave": 7,
+      "duration": 0.9025,
+      "position": 55.68
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.385,
+      "position": 56.16
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.9075,
+      "position": 56.64
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.91,
+      "position": 56.64
+    },
+    {
+      "pitch_class": 11,
+      "octave": 7,
+      "duration": 0.9625,
+      "position": 56.64
+    },
+    {
+      "pitch_class": 11,
+      "octave": 7,
+      "duration": 0.0025,
+      "position": 57.6
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.1675,
+      "position": 57.6
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.1675,
+      "position": 57.6
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.5125,
+      "position": 122.88
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.555,
+      "position": 122.88
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.6025,
+      "position": 123.36
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.6675,
+      "position": 123.84
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.6825,
+      "position": 123.84
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.6025,
+      "position": 124.32
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.56,
+      "position": 124.8
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.5725,
+      "position": 124.8
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.58,
+      "position": 125.28
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.5175,
+      "position": 125.76
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.535,
+      "position": 125.76
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.525,
+      "position": 126.24
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.52,
+      "position": 126.72
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.53,
+      "position": 126.72
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.575,
+      "position": 127.2
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.505,
+      "position": 127.68
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.5075,
+      "position": 127.68
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.515,
+      "position": 128.16
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.55,
+      "position": 128.64
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.5975,
+      "position": 129.12
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.485,
+      "position": 129.6
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.56,
+      "position": 129.6
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.515,
+      "position": 130.08
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.24,
+      "position": 130.56
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.55,
+      "position": 130.56
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.5625,
+      "position": 130.56
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.5375,
+      "position": 131.04
+    },
+    {
+      "pitch_class": 10,
+      "octave": 7,
+      "duration": 0.48,
+      "position": 131.52
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.495,
+      "position": 131.52
+    },
+    {
+      "pitch_class": 3,
+      "octave": 7,
+      "duration": 0.485,
+      "position": 132.0
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.5025,
+      "position": 132.48
+    },
+    {
+      "pitch_class": 0,
+      "octave": 7,
+      "duration": 0.64,
+      "position": 132.48
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.565,
+      "position": 132.96
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.535,
+      "position": 133.44
+    },
+    {
+      "pitch_class": 0,
+      "octave": 7,
+      "duration": 0.5425,
+      "position": 133.44
+    },
+    {
+      "pitch_class": 5,
+      "octave": 7,
+      "duration": 0.49,
+      "position": 133.92
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.37,
+      "position": 134.4
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.8525,
+      "position": 134.4
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.86,
+      "position": 134.4
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.895,
+      "position": 134.88
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.8925,
+      "position": 135.36
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.945,
+      "position": 135.36
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.3825,
+      "position": 135.84
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.3625,
+      "position": 136.32
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.8425,
+      "position": 136.32
+    },
+    {
+      "pitch_class": 6,
+      "octave": 7,
+      "duration": 0.85,
+      "position": 136.32
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.88,
+      "position": 136.8
+    },
+    {
+      "pitch_class": 6,
+      "octave": 7,
+      "duration": 0.6075,
+      "position": 137.28
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.815,
+      "position": 137.28
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.35,
+      "position": 137.76
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.415,
+      "position": 138.24
+    },
+    {
+      "pitch_class": 9,
+      "octave": 7,
+      "duration": 0.9025,
+      "position": 138.24
+    },
+    {
+      "pitch_class": 11,
+      "octave": 7,
+      "duration": 0.9025,
+      "position": 138.24
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.385,
+      "position": 138.72
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.9075,
+      "position": 139.2
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.91,
+      "position": 139.2
+    },
+    {
+      "pitch_class": 11,
+      "octave": 7,
+      "duration": 0.9625,
+      "position": 139.2
+    },
+    {
+      "pitch_class": 11,
+      "octave": 7,
+      "duration": 0.0025,
+      "position": 140.16
+    },
+    {
+      "pitch_class": 2,
+      "octave": 7,
+      "duration": 0.1675,
+      "position": 140.16
+    },
+    {
+      "pitch_class": 7,
+      "octave": 7,
+      "duration": 0.1675,
+      "position": 140.16
+    }
+  ]
+]
