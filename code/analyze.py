@@ -2,16 +2,18 @@ import os
 import json
 import numpy as np
 import matplotlib.pyplot as plt
+import subprocess  # 用於執行外部 Python 腳本
+
+# ANSI 顏色程式碼 (用於終端輸出)
+RED = "\033[91m"
+GREEN = "\033[92m"
+BLUE = "\033[94m"
+RESET = "\033[0m"
 
 
-def analyze_breathing_suitability(notes, output_path):
-    """
-    Analyzes the breathing suitability of a sequence of notes.
+def calculate_breathing_suitability(notes):
+    """Calculates the breathing suitability scores for a list of notes."""
 
-    Args:
-        notes (list): A list of note data.
-        output_path (str): The path to save the generated plot.
-    """
     positions = []
     suitability_scores = []
     max_pause = 0
@@ -30,23 +32,12 @@ def analyze_breathing_suitability(notes, output_path):
     else:
         suitability_scores = np.zeros_like(suitability_scores)
 
-    plt.figure(figsize=(10, 5))
-    plt.plot(positions, suitability_scores)
-    plt.title("Breathing Suitability Analysis\n(Higher score = more suitable)")  # 加入文字說明
-    plt.xlabel("Position (seconds)")  # 加入單位
-    plt.ylabel("Suitability Score")
-    plt.savefig(output_path)
-    plt.close()
+    return positions, suitability_scores
 
 
-def analyze_technical_difficulty(notes, output_path):
-    """
-    Analyzes the technical difficulty of a sequence of notes.
+def calculate_technical_difficulty(notes):
+    """Calculates the technical difficulty scores for a list of notes."""
 
-    Args:
-        notes (list): A list of note data.
-        output_path (str): The path to save the generated plot.
-    """
     positions = []
     difficulty_scores = []
     max_pitch_change = 0
@@ -69,27 +60,107 @@ def analyze_technical_difficulty(notes, output_path):
     else:
         difficulty_scores = np.zeros_like(difficulty_scores)
 
+    return positions, difficulty_scores
+
+
+def analyze_breathing_suitability(
+    notes, output_path, avg_breathing, q1_breathing, q3_breathing
+):
+    """
+    Analyzes the breathing suitability of a sequence of notes and plots
+    the results with average and quartile lines.
+
+    Args:
+        notes (list): A list of note data.
+        output_path (str): The path to save the generated plot.
+        avg_breathing (float): Average breathing suitability score.
+        q1_breathing (float): 25th percentile of breathing suitability scores.
+        q3_breathing (float): 75th percentile of breathing suitability scores.
+    """
+
+    positions, suitability_scores = calculate_breathing_suitability(notes)
+
     plt.figure(figsize=(10, 5))
-    plt.plot(positions, difficulty_scores)
-    plt.title("Technical Difficulty Analysis\n(Higher score = more difficult)")  # 加入文字說明
-    plt.xlabel("Position (seconds)")  # 加入單位
-    plt.ylabel("Difficulty Score")
+    plt.plot(positions, suitability_scores)
+    plt.axhline(
+        y=avg_breathing, color="red", linestyle="-", label=f"Avg: {avg_breathing:.2f}"
+    )
+    plt.axhline(
+        y=q1_breathing, color="blue", linestyle="--", label=f"25th: {q1_breathing:.2f}"
+    )
+    plt.axhline(
+        y=q3_breathing, color="green", linestyle="--", label=f"75th: {q3_breathing:.2f}"
+    )
+    plt.title("Breathing Suitability Analysis\n(Higher score = more suitable)")
+    plt.xlabel("Position (seconds)")
+    plt.ylabel("Suitability Score")
+    plt.legend()  # 顯示圖例
     plt.savefig(output_path)
     plt.close()
 
 
-def process_track_folder(converted_track_folder_path, output_root):
+def analyze_technical_difficulty(
+    notes, output_path, avg_difficulty, q1_difficulty, q3_difficulty
+):
     """
-    Processes all SXX.json files within a given track folder.
+    Analyzes the technical difficulty of a sequence of notes and plots
+    the results with average and quartile lines.
 
     Args:
-        converted_track_folder_path (str): Path to the track folder in converted_json.
-        output_root (str): Root path for output files.
+        notes (list): A list of note data.
+        output_path (str): The path to save the generated plot.
+        avg_difficulty (float): Average technical difficulty score.
+        q1_difficulty (float): 25th percentile of technical difficulty scores.
+        q3_difficulty (float): 75th percentile of technical difficulty scores.
+    """
+
+    positions, difficulty_scores = calculate_technical_difficulty(notes)
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(positions, difficulty_scores)
+    plt.axhline(
+        y=avg_difficulty, color="red", linestyle="-", label=f"Avg: {avg_difficulty:.2f}"
+    )
+    plt.axhline(
+        y=q1_difficulty,
+        color="blue",
+        linestyle="--",
+        label=f"25th: {q1_difficulty:.2f}",
+    )
+    plt.axhline(
+        y=q3_difficulty,
+        color="green",
+        linestyle="--",
+        label=f"75th: {q3_difficulty:.2f}",
+    )
+    plt.title("Technical Difficulty Analysis\n(Higher score = more difficult)")
+    plt.xlabel("Position (seconds)")
+    plt.ylabel("Difficulty Score")
+    plt.legend()  # 顯示圖例
+    plt.savefig(output_path)
+    plt.close()
+
+
+def process_track_folder(
+    converted_track_folder_path,
+    output_root,
+    avg_breathing,
+    q1_breathing,
+    q3_breathing,
+    avg_difficulty,
+    q1_difficulty,
+    q3_difficulty,
+):
+    """
+    Processes all SXX.json files within a given track folder and returns
+    a dictionary of analysis results keyed by filename.
     """
     track_folder_name = os.path.basename(converted_track_folder_path)
     output_folder_name = track_folder_name + "_features"
     output_folder_path = os.path.join(output_root, output_folder_name)
     os.makedirs(output_folder_path, exist_ok=True)
+
+    analysis_results = {}
 
     for filename in os.listdir(converted_track_folder_path):
         if filename.startswith("S") and filename.endswith(".json"):
@@ -105,7 +176,7 @@ def process_track_folder(converted_track_folder_path, output_root):
             try:
                 with open(json_path, "r") as f:
                     notes_data = json.load(f)
-                    if not isinstance(notes_data, list) or not notes_data:  # Check if notes_data is a list and not empty
+                    if not isinstance(notes_data, list) or not notes_data:
                         print(f"[警告] {json_path} does not contain valid note data, skipping")
                         continue
                     notes_data = notes_data[0]
@@ -116,9 +187,37 @@ def process_track_folder(converted_track_folder_path, output_root):
                 print(f"[警告] {json_path} is not a valid JSON file, skipping")
                 continue
 
-            analyze_breathing_suitability(notes_data, output_breathing_path)
-            analyze_technical_difficulty(notes_data, output_difficulty_path)
+            # Calculate and store the mean values with the filename as key
+            breathing_positions, breathing_scores = calculate_breathing_suitability(notes_data)
+            avg_breathing_score = np.mean(breathing_scores) if len(breathing_scores) > 0 else 0
+
+            difficulty_positions, difficulty_scores = calculate_technical_difficulty(notes_data)
+            avg_difficulty_score = np.mean(difficulty_scores) if len(difficulty_scores) > 0 else 0
+
+            analysis_results[filename] = {
+                "breath": avg_breathing_score,
+                "difficulty": avg_difficulty_score,
+            }
+
+            # Plot with global averages and quartiles
+            analyze_breathing_suitability(
+                notes_data,
+                output_breathing_path,
+                avg_breathing,
+                q1_breathing,
+                q3_breathing,
+            )
+            analyze_technical_difficulty(
+                notes_data,
+                output_difficulty_path,
+                avg_difficulty,
+                q1_difficulty,
+                q3_difficulty,
+            )
+
             print(f"✅ 已處理 {filename}")
+
+    return analysis_results
 
 
 if __name__ == "__main__":
@@ -126,13 +225,60 @@ if __name__ == "__main__":
     output_root = "./output"  # 輸出資料夾的根路徑
     os.makedirs(output_root, exist_ok=True)
 
+    # 執行 aggregate_analysis.py 進行資料彙總
+    subprocess.run(["python", "./code/aggregate_analyze.py"], check=True)
+
+    # Load aggregated statistics
+    with open(os.path.join(output_root, "avg_breath.json"), "r") as f:
+        avg_breath_data = json.load(f)
+
+    with open(os.path.join(output_root, "avg_difficult.json"), "r") as f:
+        avg_difficult_data = json.load(f)
+
+    # Extract stats for easier use
+    avg_breathing = avg_breath_data["average"]
+    q1_breathing = avg_breath_data["25th_percentile"]
+    q3_breathing = avg_breath_data["75th_percentile"]
+    avg_difficulty = avg_difficult_data["average"]
+    q1_difficulty = avg_difficult_data["25th_percentile"]
+    q3_difficulty = avg_difficult_data["75th_percentile"]
+
+    print("\n📊 所有 Track 的分析結果：")
     for track_folder in os.listdir(converted_root):
         converted_track_folder_path = os.path.join(converted_root, track_folder)
         if (
             os.path.isdir(converted_track_folder_path)
             and track_folder.startswith("Track")
         ):
-            print(f"\n🔍 處理中: {track_folder}")
-            process_track_folder(converted_track_folder_path, output_root)
+            print(f"\n🎵 {track_folder}:")
+            analysis_results = process_track_folder(
+                converted_track_folder_path,
+                output_root,
+                avg_breathing,
+                q1_breathing,
+                q3_breathing,
+                avg_difficulty,
+                q1_difficulty,
+                q3_difficulty,
+            )
 
-    print("\n🎉 所有 Track 資料夾處理完成！")
+            for filename in os.listdir(converted_track_folder_path):
+                if filename.startswith("S") and filename.endswith(".json"):
+                    print(f"  - {filename}:")
+                    if filename in analysis_results:
+                        print(
+                            f"    Breath: {analysis_results[filename]['breath']:.4f} "
+                            f" (Avg: {RED}{avg_breathing:.4f}{RESET}, "
+                            f"Q1: {BLUE}{q1_breathing:.4f}{RESET}, "
+                            f"Q3: {GREEN}{q3_breathing:.4f}{RESET}) "
+                        )
+                        print(
+                            f"    Diff: {analysis_results[filename]['difficulty']:.4f} "
+                            f" (Avg: {RED}{avg_difficulty:.4f}{RESET}, "
+                            f"Q1: {BLUE}{q1_difficulty:.4f}{RESET}, "
+                            f"Q3: {GREEN}{q3_difficulty:.4f}{RESET}) "
+                        )
+                    else:
+                        print(f"    (分析失敗或跳過)")
+
+    print("\n🎉 分析完成！")
