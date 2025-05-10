@@ -7,47 +7,80 @@
         },
         "S01": {
             "original_inst_class": "Guitar",
-            "assigned_instrument": "french_horn"
+            "assigned_instrument": [
+                "French Horn",
+                1
+            ]
         },
         "S02": {
             "original_inst_class": "Guitar",
-            "assigned_instrument": "french_horn"
+            "assigned_instrument": [
+                "French Horn",
+                2
+            ]
         },
         "S03": {
             "original_inst_class": "Piano",
-            "assigned_instrument": "french_horn"
+            "assigned_instrument": [
+                "French Horn",
+                3
+            ]
         },
         "S04": {
             "original_inst_class": "Piano",
-            "assigned_instrument": "trombone"
+            "assigned_instrument": [
+                "French Horn",
+                4
+            ]
         },
         "S05": {
             "original_inst_class": "Bass",
-            "assigned_instrument": "trombone"
+            "assigned_instrument": [
+                "Tuba",
+                1
+            ]
         },
         "S06": {
             "original_inst_class": "Strings (continued)",
-            "assigned_instrument": "tuba"
+            "assigned_instrument": [
+                "Tuba",
+                2
+            ]
         },
         "S07": {
             "original_inst_class": "Strings (continued)",
-            "assigned_instrument": "french_horn"
+            "assigned_instrument": [
+                "Trumpet",
+                1
+            ]
         },
         "S08": {
             "original_inst_class": "Strings (continued)",
-            "assigned_instrument": "euphonium"
+            "assigned_instrument": [
+                "French Horn",
+                5
+            ]
         },
         "S09": {
             "original_inst_class": "Strings",
-            "assigned_instrument": "french_horn"
+            "assigned_instrument": [
+                "Trumpet",
+                2
+            ]
         },
         "S10": {
             "original_inst_class": "Bass",
-            "assigned_instrument": "french_horn"
+            "assigned_instrument": [
+                "Trumpet",
+                3
+            ]
         },
         "S11": {
             "original_inst_class": "Chromatic Percussion",
-            "assigned_instrument": "trumpet"
+            "assigned_instrument": [
+                "Trumpet",
+                4
+            ]
         }
     }
 }

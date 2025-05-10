@@ -3,7 +3,10 @@
     "stems": {
         "S00": {
             "original_inst_class": "Bass",
-            "assigned_instrument": "tuba"
+            "assigned_instrument": [
+                "Tuba",
+                1
+            ]
         },
         "S01": {
             "original_inst_class": "Drums",
@@ -11,23 +14,38 @@
         },
         "S02": {
             "original_inst_class": "Piano",
-            "assigned_instrument": "euphonium"
+            "assigned_instrument": [
+                "French Horn",
+                1
+            ]
         },
         "S03": {
             "original_inst_class": "Guitar",
-            "assigned_instrument": "trombone"
+            "assigned_instrument": [
+                "Tuba",
+                2
+            ]
         },
         "S04": {
             "original_inst_class": "Strings (continued)",
-            "assigned_instrument": "euphonium"
+            "assigned_instrument": [
+                "French Horn",
+                2
+            ]
         },
         "S05": {
             "original_inst_class": "Piano",
-            "assigned_instrument": "trombone"
+            "assigned_instrument": [
+                "Tuba",
+                3
+            ]
         },
         "S06": {
             "original_inst_class": "Synth Pad",
-            "assigned_instrument": "euphonium"
+            "assigned_instrument": [
+                "French Horn",
+                3
+            ]
         }
     }
 }
