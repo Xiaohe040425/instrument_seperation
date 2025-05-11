@@ -17,4 +17,9 @@ def create_app(config_class=Config):
 
     app.register_blueprint(main_bp)
 
+    # 打印已註冊的路由，用於調試
+    print("已註冊的路由:")
+    for rule in app.url_map.iter_rules():
+        print(f"{rule.endpoint} - {rule.rule} [{', '.join(rule.methods)}]")
+
     return app

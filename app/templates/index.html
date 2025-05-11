@@ -3,41 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <style>
-        body {
-            font-family: 'Microsoft JhengHei', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 800px;
-            width: 100%;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #666;
-            line-height: 1.6;
-        }
-    </style>
+    <title>流行樂轉管樂譜系統</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>基於特徵分析的多軌管樂器自動分配系統</h1>
-        <p>歡迎使用本系統！這個系統可以分析音樂檔案，並自動將音軌分配給適合的管樂器。</p>
-        <p>系統正在初始化中，請稍後再試。</p>
+    <!-- 頂部導航欄 -->
+    <div class="navbar">
+        <div class="navbar-title">流行樂轉管樂譜系統</div>
+        <div class="navbar-controls">
+            <button class="icon-button"><i class="fas fa-exclamation-triangle"></i></button>
+            <button class="icon-button"><i class="fas fa-cog"></i></button>
+            <button class="icon-button"><i class="fas fa-expand"></i></button>
+        </div>
     </div>
+
+    <!-- 主要內容 -->
+    <div class="main-container">
+        <h1 class="page-title">流行樂轉管樂譜系統</h1>
+        
+        <div class="card">
+            <form id="upload-form" action="{{ url_for('main.upload_file') }}" method="post" enctype="multipart/form-data">
+                <div class="drop-zone" id="drop-zone">
+                    <p class="drop-zone-text">拖拉檔案至此</p>
+                    <input type="file" name="file" id="file-input" class="hidden" accept=".wav,.mp3,.mid,.midi">
+                    <p class="file-format-info">支援資料格式： .mp3, .wav, MIDI</p>
+                </div>
+                
+                <div class="btn-container">
+                    <button type="button" id="browse-btn" class="btn">輸入檔案</button>
+                    <button type="submit" class="btn">開始轉換</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 檔案上傳相關JavaScript
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const browseBtn = document.getElementById('browse-btn');
+        
+        // 點擊「輸入檔案」按鈕時觸發檔案選擇
+        browseBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        // 監聽檔案選擇
+        fileInput.addEventListener('change', (e) => {
+            if (fileInput.files.length) {
+                dropZone.querySelector('.drop-zone-text').textContent = `已選擇檔案: ${fileInput.files[0].name}`;
+            }
+        });
+        
+        // 監聽拖放事件
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = '#634530';
+        });
+        
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.backgroundColor = '#53341e';
+        });
+        
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.backgroundColor = '#53341e';
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                dropZone.querySelector('.drop-zone-text').textContent = `已選擇檔案: ${fileInput.files[0].name}`;
+            }
+        });
+        
+        // 點擊拖放區域也可以選擇檔案
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+    </script>
 </body>
 </html>

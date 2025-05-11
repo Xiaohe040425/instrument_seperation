@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轉換結果 - 流行樂轉管樂譜系統</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+<body>
+    <!-- 頂部導航欄 -->
+    <div class="navbar">
+        <div class="navbar-title">
+            <a href="{{ url_for('main.index') }}" style="color: white; text-decoration: none;">
+                <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>流行樂轉管樂譜系統
+            </a>
+        </div>
+        <div class="navbar-controls">
+            <button class="icon-button"><i class="fas fa-exclamation-triangle"></i></button>
+            <button class="icon-button"><i class="fas fa-cog"></i></button>
+            <button class="icon-button"><i class="fas fa-expand"></i></button>
+        </div>
+    </div>
+
+    <!-- 主要內容 -->
+    <div class="main-container" style="padding-top: 0;">
+        <div class="result-layout">
+            <!-- 左側：輸入檔案列表 -->
+            <div class="file-list">
+                <h3 class="section-title">輸入檔案</h3>
+                <div id="input-files-container">
+                    {% for file in input_files %}
+                    <div class="file-item">{{ file.name }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- 中間：轉換進度和控制 -->
+            <div class="conversion-status">
+                <div class="progress-container">
+                    <h3 id="status-text">
+                        {% if progress == 100 %}
+                        轉換完成
+                        {% elif progress > 0 %}
+                        轉換中...
+                        {% else %}
+                        準備開始轉換
+                        {% endif %}
+                    </h3>
+                    <div class="progress-bar">
+                        <div id="progress" class="progress" style="width: '{{ progress }}%'"></div>
+                    </div>
+                    <p id="progress-text">{{ progress }}% 已完成</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    {% if progress < 100 %}
+                    <button id="start-convert-btn" class="btn">開始轉換</button>
+                    {% else %}
+                    <a href="{{ url_for('main.statistic_page', job_id=job_id, chart_type='breathing') }}" class="btn">分析圖表</a>
+                    {% endif %}
+                </div>
+                
+                <div style="margin-top: 30px; text-align: center;">
+                    <img src="{{ url_for('static', filename='img/arrow.png') }}" alt="箭頭" style="width: 100px; height: auto;">
+                </div>
+            </div>
+            
+            <!-- 右側：輸出檔案列表 -->
+            <div class="file-list">
+                <h3 class="section-title">輸出檔案</h3>
+                <div id="output-files-container">
+                    {% for file in output_files %}
+                    <div class="file-item">{{ file.name }}</div>
+                    {% endfor %}
+                </div>
+                
+                {% if output_files %}
+                <div style="margin-top: 30px; text-align: center;">
+                    <a href="{{ url_for('main.download_results', job_id=job_id) }}" class="btn">下載檔案</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const jobId = "{{ job_id }}";
+    let progress = {{ progress }};
+    const startConvertBtn = document.getElementById('start-convert-btn');
+    const progressElement = document.getElementById('progress');
+    const progressTextElement = document.getElementById('progress-text');
+    const statusTextElement = document.getElementById('status-text');
+    
+    console.log("Job ID:", jobId);
+    console.log("Initial progress:", progress);
+    console.log("Start button found:", !!startConvertBtn);
+    
+    // 如果進度尚未完成，設置開始轉換按鈕事件
+    if (progress < 100 && startConvertBtn) {
+        console.log("Adding event listener to start button");
+        
+        startConvertBtn.addEventListener('click', function() {
+            console.log("Start button clicked");
+            
+            // 禁用按鈕防止重複點擊
+            this.disabled = true;
+            this.textContent = '處理中...';
+            
+            // 發送轉換請求
+            console.log("Sending request to:", '/api/convert/' + jobId);
+            
+            fetch('/api/convert/' + jobId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log("Response status:", response.status);
+                if (!response.ok) {
+                    throw new Error('網路響應不正常: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("API response:", data);
+                if (data.status === 'success') {
+                    console.log("Starting progress monitoring");
+                    // 開始監控進度
+                    startProgressMonitoring();
+                } else {
+                    console.error("Conversion failed:", data.message);
+                    alert('轉換失敗：' + data.message);
+                    this.disabled = false;
+                    this.textContent = '開始轉換';
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert('發生錯誤：' + error);
+                this.disabled = false;
+                this.textContent = '開始轉換';
+            });
+        });
+    } else {
+        console.log("Not adding event listener. Progress:", progress, "Button found:", !!startConvertBtn);
+    }
+    
+    // 如果進度已開始但尚未完成，自動開始監控進度
+    if (progress > 0 && progress < 100) {
+        console.log("Auto-starting progress monitoring");
+        startProgressMonitoring();
+    }
+    
+    // 監控進度函數
+    function startProgressMonitoring() {
+        statusTextElement.textContent = '轉換中...';
+        
+        const interval = setInterval(() => {
+            console.log("Checking progress...");
+            
+            fetch('/api/status/' + jobId)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Progress data:", data);
+                
+                if (data.status === 'error') {
+                    clearInterval(interval);
+                    console.error("Error checking progress:", data.message);
+                    alert('發生錯誤：' + data.message);
+                    return;
+                }
+                
+                // 更新進度
+                progress = data.progress;
+                progressElement.style.width = progress + '%';
+                progressTextElement.textContent = progress + '% 已完成';
+                
+                // 如果完成，重新載入頁面顯示結果
+                if (data.status === 'completed') {
+                    console.log("Conversion completed, reloading page");
+                    clearInterval(interval);
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('監控進度時發生錯誤：', error);
+            });
+        }, 1000);
+    }
+</script>
+</body>
+</html>
