@@ -74,8 +74,8 @@
         const fileListPreview = document.getElementById('file-list-preview');
         const submitBtn = document.getElementById('submit-btn');
         
-        // 檔案清單
-        let selectedFiles = new DataTransfer();
+        // 用於存儲已選擇的檔案
+        let selectedFilesArray = [];
         
         // 點擊「輸入檔案」按鈕時觸發檔案選擇
         browseBtn.addEventListener('click', () => {
@@ -84,95 +84,112 @@
         
         // 監聽檔案選擇
         fileInput.addEventListener('change', (e) => {
-            handleFiles(e.target.files);
+            // 將新選擇的檔案添加到已選擇的數組中
+            const newFiles = Array.from(e.target.files);
+            handleNewFiles(newFiles);
+            
+            // 清空input以便下次選擇不會受限制
+            fileInput.value = '';
         });
         
-        // 處理選擇的檔案
-        function handleFiles(files) {
-            if (files.length > 0) {
-                // 清除拖放區域的提示文字
-                dropZone.querySelector('.drop-zone-text').textContent = `已選擇 ${files.length} 個檔案`;
+        // 處理新添加的檔案
+        function handleNewFiles(newFiles) {
+            if (newFiles.length > 0) {
+                let validFilesAdded = 0;
                 
-                // 顯示檔案預覽清單
-                fileListPreview.classList.remove('hidden');
+                newFiles.forEach(file => {
+                    if (addFileIfValid(file)) {
+                        validFilesAdded++;
+                    }
+                });
                 
-                // 添加到已選擇的檔案清單
-                for (let i = 0; i < files.length; i++) {
-                    addFileToSelection(files[i]);
+                // 更新UI
+                updateFileListUI();
+                
+                // 如果有新檔案添加，顯示檔案列表
+                if (validFilesAdded > 0 && selectedFilesArray.length > 0) {
+                    fileListPreview.classList.remove('hidden');
                 }
-                
-                // 更新提交按鈕狀態
-                submitBtn.disabled = selectedFiles.files.length === 0;
             }
         }
         
-        // 添加檔案到選擇清單
-        function addFileToSelection(file) {
+        // 檢查檔案是否有效並添加到選擇清單
+        function addFileIfValid(file) {
             // 檢查文件類型
             const fileExtension = file.name.split('.').pop().toLowerCase();
             if (!['wav', 'mp3', 'mid', 'midi'].includes(fileExtension)) {
                 alert(`不支援的檔案類型: ${file.name}`);
-                return;
+                return false;
             }
             
             // 檢查是否已經添加過相同名稱的檔案
-            for (let i = 0; i < selectedFiles.files.length; i++) {
-                if (selectedFiles.files[i].name === file.name) {
-                    alert(`檔案 ${file.name} 已經添加過了`);
-                    return;
-                }
+            const isDuplicate = selectedFilesArray.some(existingFile => 
+                existingFile.name === file.name
+            );
+            
+            if (isDuplicate) {
+                alert(`檔案 ${file.name} 已經添加過了`);
+                return false;
             }
             
-            // 添加到DataTransfer對象
-            selectedFiles.items.add(file);
-            
-            // 更新fileInput的files屬性
-            fileInput.files = selectedFiles.files;
-            
-            // 創建檔案預覽項目
-            const fileItem = document.createElement('div');
-            fileItem.className = 'file-item-preview';
-            fileItem.innerHTML = `
-                <span>${file.name}</span>
-                <i class="fas fa-times remove-file" data-filename="${file.name}"></i>
-            `;
-            fileListPreview.appendChild(fileItem);
-            
-            // 為移除按鈕添加事件監聽
-            fileItem.querySelector('.remove-file').addEventListener('click', function() {
-                removeFileFromSelection(this.getAttribute('data-filename'), fileItem);
-            });
+            // 添加到檔案數組
+            selectedFilesArray.push(file);
+            return true;
         }
         
-        // 從選擇清單中移除檔案
-        function removeFileFromSelection(filename, fileItemElement) {
-            // 創建新的DataTransfer對象
-            const newSelectedFiles = new DataTransfer();
-            
-            // 複製不需要刪除的檔案
-            for (let i = 0; i < selectedFiles.files.length; i++) {
-                if (selectedFiles.files[i].name !== filename) {
-                    newSelectedFiles.items.add(selectedFiles.files[i]);
-                }
-            }
-            
-            // 更新選擇的檔案清單
-            selectedFiles = newSelectedFiles;
-            fileInput.files = selectedFiles.files;
-            
-            // 移除檔案預覽項目
-            fileItemElement.remove();
+        // 更新檔案列表UI
+        function updateFileListUI() {
+            // 清空檔案預覽區
+            fileListPreview.innerHTML = '';
             
             // 更新拖放區域的提示文字
-            if (selectedFiles.files.length === 0) {
+            if (selectedFilesArray.length === 0) {
                 dropZone.querySelector('.drop-zone-text').textContent = `拖拉檔案至此`;
                 fileListPreview.classList.add('hidden');
             } else {
-                dropZone.querySelector('.drop-zone-text').textContent = `已選擇 ${selectedFiles.files.length} 個檔案`;
+                dropZone.querySelector('.drop-zone-text').textContent = `已選擇 ${selectedFilesArray.length} 個檔案`;
             }
             
+            // 為每個選擇的檔案創建UI元素
+            selectedFilesArray.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item-preview';
+                fileItem.innerHTML = `
+                    <span>${file.name}</span>
+                    <i class="fas fa-times remove-file" data-filename="${file.name}"></i>
+                `;
+                fileListPreview.appendChild(fileItem);
+                
+                // 為移除按鈕添加事件監聽
+                fileItem.querySelector('.remove-file').addEventListener('click', function() {
+                    removeFile(this.getAttribute('data-filename'));
+                });
+            });
+            
             // 更新提交按鈕狀態
-            submitBtn.disabled = selectedFiles.files.length === 0;
+            submitBtn.disabled = selectedFilesArray.length === 0;
+            
+            // 準備提交表單時使用的檔案列表
+            updateFormFiles();
+        }
+        
+        // 更新表單中的文件列表
+        function updateFormFiles() {
+            // 創建一個新的FormData或DataTransfer對象來存儲檔案
+            const dataTransfer = new DataTransfer();
+            selectedFilesArray.forEach(file => dataTransfer.items.add(file));
+            
+            // 更新fileInput的files屬性
+            fileInput.files = dataTransfer.files;
+        }
+        
+        // 從選擇清單中移除檔案
+        function removeFile(filename) {
+            // 從數組中移除檔案
+            selectedFilesArray = selectedFilesArray.filter(file => file.name !== filename);
+            
+            // 更新UI
+            updateFileListUI();
         }
         
         // 監聽拖放事件
@@ -190,7 +207,9 @@
             dropZone.style.backgroundColor = '#53341e';
             
             if (e.dataTransfer.files.length) {
-                handleFiles(e.dataTransfer.files);
+                // 將拖放的檔案轉換為數組並處理
+                const droppedFiles = Array.from(e.dataTransfer.files);
+                handleNewFiles(droppedFiles);
             }
         });
         
@@ -203,11 +222,60 @@
         });
         
         // 表單提交前檢查
-        document.getElementById('upload-form').addEventListener('submit', (e) => {
-            if (selectedFiles.files.length === 0) {
-                e.preventDefault();
+        document.getElementById('upload-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // 阻止默認提交
+            
+            if (selectedFilesArray.length === 0) {
                 alert('請至少選擇一個檔案');
+                return;
             }
+            
+            console.log("準備提交表單", selectedFilesArray.length, "個檔案");
+            
+            // 創建FormData對象
+            const formData = new FormData();
+            selectedFilesArray.forEach(file => {
+                console.log("添加檔案:", file.name, file.size, "位元組");
+                formData.append('files[]', file);
+            });
+            
+            // 顯示提交進度
+            submitBtn.disabled = true;
+            submitBtn.textContent = '上傳中...';
+            
+            // 發送請求
+            fetch('{{ url_for("main.upload_file") }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                console.log("伺服器響應:", response.status, response.statusText);
+                if (response.redirected) {
+                    console.log("重定向到:", response.url);
+                    window.location.href = response.url;
+                } else {
+                    return response.text().then(text => {
+                        console.log("伺服器回應內容:", text);
+                        try {
+                            const data = JSON.parse(text);
+                            console.log("伺服器數據:", data);
+                            if (data.error) {
+                                alert("錯誤: " + data.error);
+                            }
+                        } catch(e) {
+                            console.log("回應不是JSON格式");
+                        }
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = '開始轉換';
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("提交過程中發生錯誤:", error);
+                alert('發生錯誤：' + error);
+                submitBtn.disabled = false;
+                submitBtn.textContent = '開始轉換';
+            });
         });
     </script>
 </body>

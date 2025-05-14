@@ -12,5 +12,7 @@ build/
 # VS Code
 .vscode/
 
-# 忽略 babyslakh_16k 整個資料夾
+# 忽略整個資料夾
 babyslakh_16k/
+downloads/
+uploads/
