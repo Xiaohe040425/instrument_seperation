@@ -36,46 +36,67 @@ def health_check():
 def upload_file():
     """處理檔案上傳"""
     # 檢查是否有檔案
-    if "file" not in request.files:
+    if "files[]" not in request.files:
         flash("沒有選擇檔案", "danger")
         return redirect(url_for("main.index"))
 
-    file = request.files["file"]
+    files = request.files.getlist("files[]")
 
-    # 檢查檔案是否為空
-    if file.filename == "":
+    # 檢查是否有選擇檔案
+    if not files or files[0].filename == "":
         flash("沒有選擇檔案", "danger")
         return redirect(url_for("main.index"))
 
-    # 檢查檔案類型是否允許
-    if not allowed_file(file.filename):
-        allowed_exts = ", ".join(current_app.config["ALLOWED_EXTENSIONS"])
-        flash(f"檔案類型不支援。允許的類型：{allowed_exts}", "danger")
-        return redirect(url_for("main.index"))
-
-    # 生成工作ID並保存檔案
+    # 生成工作ID
     job_id = generate_job_id()
-    filename = secure_filename(file.filename)
 
-    # 為每個工作建立獨立的目錄
+    # 為工作建立獨立的目錄
     job_dir = os.path.join(current_app.config["UPLOAD_FOLDER"], job_id)
     os.makedirs(job_dir, exist_ok=True)
 
-    file_path = os.path.join(job_dir, filename)
-    file.save(file_path)
+    # 保存檔案資訊
+    file_info_list = []
 
-    # 獲取檔案大小
-    filesize = get_file_size(file_path)
+    for file in files:
+        # 檢查檔案類型是否允許
+        if not allowed_file(file.filename):
+            allowed_exts = ", ".join(current_app.config["ALLOWED_EXTENSIONS"])
+            flash(
+                f"檔案 {file.filename} 類型不支援。允許的類型：{allowed_exts}", "danger"
+            )
+            continue
+
+        # 安全的檔案名稱
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(job_dir, filename)
+
+        # 保存檔案
+        file.save(file_path)
+
+        # 獲取檔案大小
+        filesize = get_file_size(file_path)
+
+        # 添加到檔案資訊列表
+        file_info_list.append(
+            {
+                "filename": filename,
+                "original_filename": file.filename,
+                "file_path": file_path,
+                "filesize": filesize,
+            }
+        )
+
+    # 如果沒有成功上傳任何檔案，返回首頁
+    if not file_info_list:
+        flash("沒有成功上傳任何檔案", "danger")
+        return redirect(url_for("main.index"))
 
     # 儲存工作資訊
     job_info = {
         "job_id": job_id,
-        "filename": filename,
-        "original_filename": file.filename,
-        "file_path": file_path,
         "upload_time": get_formatted_time(),
-        "filesize": filesize,
         "status": "uploaded",
+        "files": file_info_list,
     }
 
     # 將工作資訊保存為JSON檔案
@@ -100,12 +121,13 @@ def result_page(job_id):
     with open(job_info_path, "r", encoding="utf-8") as f:
         job_info = json.load(f)
 
-    # 模擬輸入文件列表
+    # 獲取輸入文件列表
     input_files = [
         {
-            "name": job_info["original_filename"],
-            "type": job_info["filename"].split(".")[-1].upper(),
+            "name": file_info["original_filename"],
+            "type": file_info["filename"].split(".")[-1].upper(),
         }
+        for file_info in job_info["files"]
     ]
 
     # 檢查是否已經有處理結果
@@ -155,13 +177,13 @@ def convert_file(job_id):
             job_info = json.load(f)
 
         # 模擬轉換過程
-        # 實際應用中，這裡會呼叫您的後端模組進行處理
+        # 實際應用中，這裡會呼叫您的後端模組對每個檔案進行處理
 
         # 模擬分析結果
         analysis_result = {
             "job_id": job_id,
-            "filename": job_info["filename"],
             "completion_time": get_formatted_time(),
+            "file_count": len(job_info["files"]),
             "track_count": 5,  # 假設值
             "duration": 180,  # 秒
             "difficulty": 7,  # 1-10
@@ -192,6 +214,7 @@ def convert_file(job_id):
                     "score": 8,
                 },
             ],
+            "files": job_info["files"],  # 保存原始檔案資訊
         }
 
         # 保存分析結果

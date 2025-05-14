@@ -1,0 +1,25 @@
+{
+    "job_id": "55fe2a0d-c563-4663-9f6e-49f4929f6297",
+    "upload_time": "2025-05-14 19:58:57",
+    "status": "converted",
+    "files": [
+        {
+            "filename": "T2_08.mid",
+            "original_filename": "T2_08.mid",
+            "file_path": "app/uploads\\55fe2a0d-c563-4663-9f6e-49f4929f6297\\T2_08.mid",
+            "filesize": "6.02 KB"
+        },
+        {
+            "filename": "S06.mp3",
+            "original_filename": "S06.mp3",
+            "file_path": "app/uploads\\55fe2a0d-c563-4663-9f6e-49f4929f6297\\S06.mp3",
+            "filesize": "2.40 MB"
+        },
+        {
+            "filename": "S02.mp3",
+            "original_filename": "S02.mp3",
+            "file_path": "app/uploads\\55fe2a0d-c563-4663-9f6e-49f4929f6297\\S02.mp3",
+            "filesize": "558.25 KB"
+        }
+    ]
+}

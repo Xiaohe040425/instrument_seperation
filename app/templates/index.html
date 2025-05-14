@@ -6,6 +6,31 @@
     <title>流行樂轉管樂譜系統</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <style>
+        /* 檔案清單樣式 */
+        .file-list-preview {
+            margin-top: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .file-item-preview {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-item-preview .remove-file {
+            cursor: pointer;
+            color: #faf5e4;
+            font-size: 16px;
+        }
+        .file-item-preview .remove-file:hover {
+            color: #ff6b6b;
+        }
+    </style>
 </head>
 <body>
     <!-- 頂部導航欄 -->
@@ -26,13 +51,16 @@
             <form id="upload-form" action="{{ url_for('main.upload_file') }}" method="post" enctype="multipart/form-data">
                 <div class="drop-zone" id="drop-zone">
                     <p class="drop-zone-text">拖拉檔案至此</p>
-                    <input type="file" name="file" id="file-input" class="hidden" accept=".wav,.mp3,.mid,.midi">
+                    <input type="file" name="files[]" id="file-input" class="hidden" accept=".wav,.mp3,.mid,.midi" multiple>
                     <p class="file-format-info">支援資料格式： .mp3, .wav, MIDI</p>
+                    
+                    <!-- 檔案預覽清單 -->
+                    <div id="file-list-preview" class="file-list-preview hidden"></div>
                 </div>
                 
                 <div class="btn-container">
                     <button type="button" id="browse-btn" class="btn">輸入檔案</button>
-                    <button type="submit" class="btn">開始轉換</button>
+                    <button type="submit" class="btn" id="submit-btn">開始轉換</button>
                 </div>
             </form>
         </div>
@@ -43,6 +71,11 @@
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('file-input');
         const browseBtn = document.getElementById('browse-btn');
+        const fileListPreview = document.getElementById('file-list-preview');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        // 檔案清單
+        let selectedFiles = new DataTransfer();
         
         // 點擊「輸入檔案」按鈕時觸發檔案選擇
         browseBtn.addEventListener('click', () => {
@@ -51,10 +84,96 @@
         
         // 監聽檔案選擇
         fileInput.addEventListener('change', (e) => {
-            if (fileInput.files.length) {
-                dropZone.querySelector('.drop-zone-text').textContent = `已選擇檔案: ${fileInput.files[0].name}`;
-            }
+            handleFiles(e.target.files);
         });
+        
+        // 處理選擇的檔案
+        function handleFiles(files) {
+            if (files.length > 0) {
+                // 清除拖放區域的提示文字
+                dropZone.querySelector('.drop-zone-text').textContent = `已選擇 ${files.length} 個檔案`;
+                
+                // 顯示檔案預覽清單
+                fileListPreview.classList.remove('hidden');
+                
+                // 添加到已選擇的檔案清單
+                for (let i = 0; i < files.length; i++) {
+                    addFileToSelection(files[i]);
+                }
+                
+                // 更新提交按鈕狀態
+                submitBtn.disabled = selectedFiles.files.length === 0;
+            }
+        }
+        
+        // 添加檔案到選擇清單
+        function addFileToSelection(file) {
+            // 檢查文件類型
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+            if (!['wav', 'mp3', 'mid', 'midi'].includes(fileExtension)) {
+                alert(`不支援的檔案類型: ${file.name}`);
+                return;
+            }
+            
+            // 檢查是否已經添加過相同名稱的檔案
+            for (let i = 0; i < selectedFiles.files.length; i++) {
+                if (selectedFiles.files[i].name === file.name) {
+                    alert(`檔案 ${file.name} 已經添加過了`);
+                    return;
+                }
+            }
+            
+            // 添加到DataTransfer對象
+            selectedFiles.items.add(file);
+            
+            // 更新fileInput的files屬性
+            fileInput.files = selectedFiles.files;
+            
+            // 創建檔案預覽項目
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item-preview';
+            fileItem.innerHTML = `
+                <span>${file.name}</span>
+                <i class="fas fa-times remove-file" data-filename="${file.name}"></i>
+            `;
+            fileListPreview.appendChild(fileItem);
+            
+            // 為移除按鈕添加事件監聽
+            fileItem.querySelector('.remove-file').addEventListener('click', function() {
+                removeFileFromSelection(this.getAttribute('data-filename'), fileItem);
+            });
+        }
+        
+        // 從選擇清單中移除檔案
+        function removeFileFromSelection(filename, fileItemElement) {
+            // 創建新的DataTransfer對象
+            const newSelectedFiles = new DataTransfer();
+            
+            // 複製不需要刪除的檔案
+            for (let i = 0; i < selectedFiles.files.length; i++) {
+                if (selectedFiles.files[i].name !== filename) {
+                    newSelectedFiles.items.add(selectedFiles.files[i]);
+                }
+            }
+            
+            // 更新選擇的檔案清單
+            selectedFiles = newSelectedFiles;
+            fileInput.files = selectedFiles.files;
+            
+            // 移除檔案預覽項目
+            fileItemElement.remove();
+            
+            // 更新拖放區域的提示文字
+            if (selectedFiles.files.length === 0) {
+                dropZone.querySelector('.drop-zone-text').textContent = `拖拉檔案至此`;
+                fileListPreview.classList.add('hidden');
+            } else {
+                dropZone.querySelector('.drop-zone-text').textContent = `已選擇 ${selectedFiles.files.length} 個檔案`;
+            }
+            
+            // 更新提交按鈕狀態
+            submitBtn.disabled = selectedFiles.files.length === 0;
+        }
         
         // 監聽拖放事件
         dropZone.addEventListener('dragover', (e) => {
@@ -71,14 +190,24 @@
             dropZone.style.backgroundColor = '#53341e';
             
             if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                dropZone.querySelector('.drop-zone-text').textContent = `已選擇檔案: ${fileInput.files[0].name}`;
+                handleFiles(e.dataTransfer.files);
             }
         });
         
         // 點擊拖放區域也可以選擇檔案
-        dropZone.addEventListener('click', () => {
-            fileInput.click();
+        dropZone.addEventListener('click', (e) => {
+            // 避免點擊移除按鈕時觸發
+            if (!e.target.classList.contains('remove-file')) {
+                fileInput.click();
+            }
+        });
+        
+        // 表單提交前檢查
+        document.getElementById('upload-form').addEventListener('submit', (e) => {
+            if (selectedFiles.files.length === 0) {
+                e.preventDefault();
+                alert('請至少選擇一個檔案');
+            }
         });
     </script>
 </body>
