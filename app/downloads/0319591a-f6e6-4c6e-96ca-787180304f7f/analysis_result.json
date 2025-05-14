@@ -1,0 +1,40 @@
+{
+    "job_id": "0319591a-f6e6-4c6e-96ca-787180304f7f",
+    "filename": "S06.mp3",
+    "completion_time": "2025-05-14 20:03:04",
+    "track_count": 5,
+    "duration": 180,
+    "difficulty": 7,
+    "tracks": [
+        {
+            "name": "主旋律",
+            "instrument": "Trumpet1",
+            "role": "主旋律",
+            "score": 9
+        },
+        {
+            "name": "和聲1",
+            "instrument": "Trombone",
+            "role": "和弦墊底",
+            "score": 8
+        },
+        {
+            "name": "和聲2",
+            "instrument": "Horn",
+            "role": "和弦墊底",
+            "score": 7
+        },
+        {
+            "name": "低音部",
+            "instrument": "Tuba",
+            "role": "主律動（基底）",
+            "score": 9
+        },
+        {
+            "name": "打擊樂",
+            "instrument": "Drums",
+            "role": "節奏樂器",
+            "score": 8
+        }
+    ]
+}

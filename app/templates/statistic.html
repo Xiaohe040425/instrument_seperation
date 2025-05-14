@@ -24,18 +24,17 @@
 
     <!-- 主要內容 -->
     <div class="main-container" style="padding-top: 20px;">
-        <a href="{{ url_for('main.index', job_id=job_id) }}" class="back-button">
+        <a href="{{ url_for('main.index') }}" class="back-button">
             <i class="fas fa-arrow-left"></i> 回主畫面
         </a>
         
-        <div class="result-layout">
+        <div class="statistic-layout">
             <!-- 左側：圖表選單 -->
             <div class="chart-menu">
                 <h3 class="section-title">分析圖表</h3>
                 {% for chart in chart_types %}
                 <a href="{{ url_for('main.statistic_page', job_id=job_id, chart_type=chart.id) }}" 
-                   class="chart-button" 
-                   style="{% if chart_type == chart.id %}background-color: #e9e0c9;{% endif %}">
+                   class="chart-button {% if chart_type == chart.id %}active{% endif %}">
                     {{ chart.name }}
                 </a>
                 {% endfor %}
