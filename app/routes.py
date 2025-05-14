@@ -12,9 +12,11 @@ from flask import (
 )
 import os
 from werkzeug.utils import secure_filename
-from app.utils import allowed_file, generate_job_id, get_file_size, get_formatted_time
 import json
 import shutil
+import uuid
+from datetime import datetime
+from app.utils import allowed_file, generate_job_id, get_file_size, get_formatted_time
 
 # 建立藍圖
 main_bp = Blueprint("main", __name__)
@@ -33,57 +35,94 @@ def health_check():
 
 
 @main_bp.route("/upload", methods=["POST"])
+@main_bp.route("/upload", methods=["POST"])
 def upload_file():
     """處理檔案上傳"""
+    print("進入upload_file函數")
+
     # 檢查是否有檔案
-    if "file" not in request.files:
+    if "files[]" not in request.files:
+        print("沒有找到'files[]'參數")
         flash("沒有選擇檔案", "danger")
         return redirect(url_for("main.index"))
 
-    file = request.files["file"]
+    files = request.files.getlist("files[]")
+    print(f"接收到的檔案數量: {len(files)}")
 
-    # 檢查檔案是否為空
-    if file.filename == "":
+    # 檢查是否有選擇檔案
+    if not files or files[0].filename == "":
+        print("沒有檔案或第一個檔案名為空")
         flash("沒有選擇檔案", "danger")
         return redirect(url_for("main.index"))
 
-    # 檢查檔案類型是否允許
-    if not allowed_file(file.filename):
-        allowed_exts = ", ".join(current_app.config["ALLOWED_EXTENSIONS"])
-        flash(f"檔案類型不支援。允許的類型：{allowed_exts}", "danger")
-        return redirect(url_for("main.index"))
-
-    # 生成工作ID並保存檔案
+    # 生成工作ID
     job_id = generate_job_id()
-    filename = secure_filename(file.filename)
+    print(f"生成的job_id: {job_id}")
 
-    # 為每個工作建立獨立的目錄
+    # 為工作建立獨立的目錄
     job_dir = os.path.join(current_app.config["UPLOAD_FOLDER"], job_id)
     os.makedirs(job_dir, exist_ok=True)
 
-    file_path = os.path.join(job_dir, filename)
-    file.save(file_path)
+    # 保存檔案資訊
+    file_info_list = []
 
-    # 獲取檔案大小
-    filesize = get_file_size(file_path)
+    for file in files:
+        # 檢查檔案類型是否允許
+        if not allowed_file(file.filename):
+            print(f"檔案類型不支援: {file.filename}")
+            allowed_exts = ", ".join(current_app.config["ALLOWED_EXTENSIONS"])
+            flash(
+                f"檔案 {file.filename} 類型不支援。允許的類型：{allowed_exts}", "danger"
+            )
+            continue
+
+        # 安全的檔案名稱
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(job_dir, filename)
+
+        # 保存檔案
+        file.save(file_path)
+        print(f"檔案已保存: {file_path}")
+
+        # 獲取檔案大小
+        filesize = get_file_size(file_path)
+
+        # 添加到檔案資訊列表
+        file_info_list.append(
+            {
+                "filename": filename,
+                "original_filename": file.filename,
+                "file_path": file_path,
+                "filesize": filesize,
+            }
+        )
+
+    # 如果沒有成功上傳任何檔案，返回首頁
+    if not file_info_list:
+        print("沒有成功上傳任何檔案")
+        flash("沒有成功上傳任何檔案", "danger")
+        return redirect(url_for("main.index"))
 
     # 儲存工作資訊
     job_info = {
         "job_id": job_id,
-        "filename": filename,
-        "original_filename": file.filename,
-        "file_path": file_path,
         "upload_time": get_formatted_time(),
-        "filesize": filesize,
         "status": "uploaded",
+        "files": file_info_list,
     }
 
     # 將工作資訊保存為JSON檔案
-    with open(os.path.join(job_dir, "job_info.json"), "w", encoding="utf-8") as f:
+    job_info_path = os.path.join(job_dir, "job_info.json")
+    with open(job_info_path, "w", encoding="utf-8") as f:
         json.dump(job_info, f, ensure_ascii=False, indent=4)
+    print(f"工作資訊已保存: {job_info_path}")
+
+    # 打印重定向URL
+    redirect_url = url_for("main.result_page", job_id=job_id)
+    print(f"重定向到: {redirect_url}")
 
     # 轉到結果頁面
-    return redirect(url_for("main.result_page", job_id=job_id))
+    return redirect(redirect_url)
 
 
 @main_bp.route("/result/<job_id>")
@@ -100,12 +139,13 @@ def result_page(job_id):
     with open(job_info_path, "r", encoding="utf-8") as f:
         job_info = json.load(f)
 
-    # 模擬輸入文件列表
+    # 獲取輸入文件列表
     input_files = [
         {
-            "name": job_info["original_filename"],
-            "type": job_info["filename"].split(".")[-1].upper(),
+            "name": file_info["original_filename"],
+            "type": file_info["filename"].split(".")[-1].upper(),
         }
+        for file_info in job_info["files"]
     ]
 
     # 檢查是否已經有處理結果
@@ -143,77 +183,58 @@ def result_page(job_id):
 @main_bp.route("/api/convert/<job_id>", methods=["POST"])
 def convert_file(job_id):
     """開始文件轉換處理"""
-    try:
-        # 讀取工作資訊
-        job_dir = os.path.join(current_app.config["UPLOAD_FOLDER"], job_id)
-        job_info_path = os.path.join(job_dir, "job_info.json")
+    # 讀取工作資訊
+    job_dir = os.path.join(current_app.config["UPLOAD_FOLDER"], job_id)
+    job_info_path = os.path.join(job_dir, "job_info.json")
 
-        if not os.path.exists(job_info_path):
-            return jsonify({"status": "error", "message": "找不到工作資訊"})
+    if not os.path.exists(job_info_path):
+        return jsonify({"status": "error", "message": "找不到工作資訊"})
 
-        with open(job_info_path, "r", encoding="utf-8") as f:
-            job_info = json.load(f)
+    with open(job_info_path, "r", encoding="utf-8") as f:
+        job_info = json.load(f)
 
-        # 模擬轉換過程
-        # 實際應用中，這裡會呼叫您的後端模組進行處理
+    # 模擬轉換過程
+    # 實際應用中，這裡會呼叫您的後端模組對每個檔案進行處理
 
-        # 模擬分析結果
-        analysis_result = {
-            "job_id": job_id,
-            "filename": job_info["filename"],
-            "completion_time": get_formatted_time(),
-            "track_count": 5,  # 假設值
-            "duration": 180,  # 秒
-            "difficulty": 7,  # 1-10
-            "tracks": [
-                {
-                    "name": "主旋律",
-                    "instrument": "Trumpet1",
-                    "role": "主旋律",
-                    "score": 9,
-                },
-                {
-                    "name": "和聲1",
-                    "instrument": "Trombone",
-                    "role": "和弦墊底",
-                    "score": 8,
-                },
-                {"name": "和聲2", "instrument": "Horn", "role": "和弦墊底", "score": 7},
-                {
-                    "name": "低音部",
-                    "instrument": "Tuba",
-                    "role": "主律動（基底）",
-                    "score": 9,
-                },
-                {
-                    "name": "打擊樂",
-                    "instrument": "Drums",
-                    "role": "節奏樂器",
-                    "score": 8,
-                },
-            ],
-        }
+    # 模擬分析結果
+    analysis_result = {
+        "job_id": job_id,
+        "completion_time": get_formatted_time(),
+        "file_count": len(job_info["files"]),
+        "track_count": 5,  # 假設值
+        "duration": 180,  # 秒
+        "difficulty": 7,  # 1-10
+        "tracks": [
+            {"name": "主旋律", "instrument": "Trumpet1", "role": "主旋律", "score": 9},
+            {"name": "和聲1", "instrument": "Trombone", "role": "和弦墊底", "score": 8},
+            {"name": "和聲2", "instrument": "Horn", "role": "和弦墊底", "score": 7},
+            {
+                "name": "低音部",
+                "instrument": "Tuba",
+                "role": "主律動（基底）",
+                "score": 9,
+            },
+            {"name": "打擊樂", "instrument": "Drums", "role": "節奏樂器", "score": 8},
+        ],
+        "files": job_info["files"],  # 保存原始檔案資訊
+    }
 
-        # 保存分析結果
-        results_dir = os.path.join(current_app.config["DOWNLOAD_FOLDER"], job_id)
-        os.makedirs(results_dir, exist_ok=True)
+    # 保存分析結果
+    results_dir = os.path.join(current_app.config["DOWNLOAD_FOLDER"], job_id)
+    os.makedirs(results_dir, exist_ok=True)
 
-        with open(
-            os.path.join(results_dir, "analysis_result.json"), "w", encoding="utf-8"
-        ) as f:
-            json.dump(analysis_result, f, ensure_ascii=False, indent=4)
+    with open(
+        os.path.join(results_dir, "analysis_result.json"), "w", encoding="utf-8"
+    ) as f:
+        json.dump(analysis_result, f, ensure_ascii=False, indent=4)
 
-        # 更新工作狀態
-        job_info["status"] = "converted"
+    # 更新工作狀態
+    job_info["status"] = "converted"
 
-        with open(job_info_path, "w", encoding="utf-8") as f:
-            json.dump(job_info, f, ensure_ascii=False, indent=4)
+    with open(job_info_path, "w", encoding="utf-8") as f:
+        json.dump(job_info, f, ensure_ascii=False, indent=4)
 
-        return jsonify({"status": "success", "message": "轉換完成"})
-    except Exception as e:
-        # 記錄例外以便排錯
-        print(f"轉換處理時發生錯誤: {str(e)}")
-        return jsonify({"status": "error", "message": f"處理過程中發生錯誤: {str(e)}"})
+    return jsonify({"status": "success", "message": "轉換完成"})
 
 
 @main_bp.route("/api/status/<job_id>")

@@ -1,0 +1,66 @@
+{
+    "job_id": "64ec89f1-966d-407a-b5d2-5a5de89ddc50",
+    "completion_time": "2025-05-14 21:15:32",
+    "file_count": 4,
+    "track_count": 5,
+    "duration": 180,
+    "difficulty": 7,
+    "tracks": [
+        {
+            "name": "主旋律",
+            "instrument": "Trumpet1",
+            "role": "主旋律",
+            "score": 9
+        },
+        {
+            "name": "和聲1",
+            "instrument": "Trombone",
+            "role": "和弦墊底",
+            "score": 8
+        },
+        {
+            "name": "和聲2",
+            "instrument": "Horn",
+            "role": "和弦墊底",
+            "score": 7
+        },
+        {
+            "name": "低音部",
+            "instrument": "Tuba",
+            "role": "主律動（基底）",
+            "score": 9
+        },
+        {
+            "name": "打擊樂",
+            "instrument": "Drums",
+            "role": "節奏樂器",
+            "score": 8
+        }
+    ],
+    "files": [
+        {
+            "filename": "S06.mp3",
+            "original_filename": "S06.mp3",
+            "file_path": "app/uploads\\64ec89f1-966d-407a-b5d2-5a5de89ddc50\\S06.mp3",
+            "filesize": "2.40 MB"
+        },
+        {
+            "filename": "S02.mp3",
+            "original_filename": "S02.mp3",
+            "file_path": "app/uploads\\64ec89f1-966d-407a-b5d2-5a5de89ddc50\\S02.mp3",
+            "filesize": "558.25 KB"
+        },
+        {
+            "filename": "T2_08.mid",
+            "original_filename": "T2_08.mid",
+            "file_path": "app/uploads\\64ec89f1-966d-407a-b5d2-5a5de89ddc50\\T2_08.mid",
+            "filesize": "6.02 KB"
+        },
+        {
+            "filename": "S01.mp3",
+            "original_filename": "S01.mp3",
+            "file_path": "app/uploads\\64ec89f1-966d-407a-b5d2-5a5de89ddc50\\S01.mp3",
+            "filesize": "2.76 MB"
+        }
+    ]
+}
