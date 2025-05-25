@@ -1,0 +1,22 @@
+{
+    "UUID": "test_case_001",
+    "stems": {
+        "S00": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "tuba"
+
+        },
+        "S01": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "french_horn"
+        },
+        "S02": {
+            "original_inst_class": "Bass",
+            "assigned_instrument": "tuba"
+        },
+        "S03": {
+            "original_inst_class": "Drums",
+            "assigned_instrument": "drums"
+        }
+    }
+}
