@@ -1,0 +1,57 @@
+{
+    "UUID": "ecda548334fd9ab77510536e75238bbd",
+    "stems": {
+        "S00": {
+            "original_inst_class": "Drums",
+            "assigned_instrument": "Drums"
+        },
+        "S01": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "trombone"
+        },
+        "S02": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "euphonium"
+        },
+        "S03": {
+            "original_inst_class": "Pipe",
+            "assigned_instrument": "trumpet"
+        },
+        "S04": {
+            "original_inst_class": "Bass",
+            "assigned_instrument": "tuba"
+        },
+        "S05": {
+            "original_inst_class": "Chromatic Percussion",
+            "assigned_instrument": "trumpet"
+        },
+        "S06": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "french_horn"
+        },
+        "S07": {
+            "original_inst_class": "Pipe",
+            "assigned_instrument": "trumpet"
+        },
+        "S08": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "trombone"
+        },
+        "S10": {
+            "original_inst_class": "Pipe",
+            "assigned_instrument": "euphonium"
+        },
+        "S11": {
+            "original_inst_class": "Strings (continued)",
+            "assigned_instrument": "trumpet"
+        },
+        "S12": {
+            "original_inst_class": "Reed",
+            "assigned_instrument": "french_horn"
+        },
+        "S13": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "trumpet"
+        }
+    }
+}

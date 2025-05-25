@@ -1,0 +1,69 @@
+{
+    "UUID": "3cccac3e7cd68df8f01a1a61e6ef3172",
+    "stems": {
+        "S00": {
+            "original_inst_class": "Synth Lead",
+            "assigned_instrument": "trumpet"
+        },
+        "S01": {
+            "original_inst_class": "Synth Lead",
+            "assigned_instrument": "trumpet"
+        },
+        "S02": {
+            "original_inst_class": "Organ",
+            "assigned_instrument": "trombone"
+        },
+        "S03": {
+            "original_inst_class": "Strings (continued)",
+            "assigned_instrument": "french_horn"
+        },
+        "S04": {
+            "original_inst_class": "Organ",
+            "assigned_instrument": "trombone"
+        },
+        "S05": {
+            "original_inst_class": "Strings (continued)",
+            "assigned_instrument": "french_horn"
+        },
+        "S06": {
+            "original_inst_class": "Strings (continued)",
+            "assigned_instrument": "euphonium"
+        },
+        "S07": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "trombone"
+        },
+        "S08": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "trombone"
+        },
+        "S09": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "trombone"
+        },
+        "S10": {
+            "original_inst_class": "Synth Pad",
+            "assigned_instrument": "euphonium"
+        },
+        "S11": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "trombone"
+        },
+        "S14": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "euphonium"
+        },
+        "S15": {
+            "original_inst_class": "Bass",
+            "assigned_instrument": "tuba"
+        },
+        "S16": {
+            "original_inst_class": "Bass",
+            "assigned_instrument": "tuba"
+        },
+        "S17": {
+            "original_inst_class": "Drums",
+            "assigned_instrument": "Drums"
+        }
+    }
+}
