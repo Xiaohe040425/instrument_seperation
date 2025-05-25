@@ -9,9 +9,9 @@ dist/
 build/
 .env/
 .venv/
-.mp3
-.wav
-.midi
+*.mp3
+*.wav
+*.midi
 
 # VS Code
 .vscode/

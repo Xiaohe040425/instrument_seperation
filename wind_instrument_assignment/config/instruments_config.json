@@ -1,0 +1,32 @@
+{
+    "instruments": {
+        "trumpet": {
+            "transposition_semitones": 2,
+            "program_number": 56,
+            "range_low": 58,
+            "range_high": 82,
+            "description": "小號(降B調)"
+        },
+        "french_horn": {
+            "transposition_semitones": -7,
+            "program_number": 60,
+            "range_low": 41,
+            "range_high": 77,
+            "description": "法國號(F調)"
+        },
+        "euphonium": {
+            "transposition_semitones": -14,
+            "program_number": 58,
+            "range_low": 34,
+            "range_high": 67,
+            "description": "上低音號"
+        },
+        "tuba": {
+            "transposition_semitones": 0,
+            "program_number": 58,
+            "range_low": 28,
+            "range_high": 58,
+            "description": "低音號"
+        }
+    }
+}
