@@ -103,7 +103,8 @@ for track_folder in os.listdir(features_root):
         else:
             with open(json_path, "r") as f:
                 features = json.load(f)
-            assigned_instrument = classify_brass_instrument(features)
+            instrument, assigned_part = classify_brass_instrument(features)
+            assigned_instrument = instrument # 只取樂器名稱字串
 
         result_metadata["stems"][stem_id] = {
             "original_inst_class": inst_class,
@@ -111,7 +112,9 @@ for track_folder in os.listdir(features_root):
         }
 
     # 輸出到對應的資料夾
-    track_output_dir = os.path.join(output_root, track_folder)
+    # 修改這兩行以移除 "_features" 後綴
+    track_output_name = track_folder.replace("_features", "") # 移除 _features 後綴
+    track_output_dir = os.path.join(output_root, track_output_name)
     os.makedirs(track_output_dir, exist_ok=True)
     output_metadata_path = os.path.join(track_output_dir, "metadata.json")
     with open(output_metadata_path, "w") as f:

@@ -1,0 +1,65 @@
+{
+    "UUID": "da41ff8258131a291e36cec39b98c5f8",
+    "stems": {
+        "S00": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "euphonium"
+        },
+        "S01": {
+            "original_inst_class": "Bass",
+            "assigned_instrument": "tuba"
+        },
+        "S02": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "tuba"
+        },
+        "S03": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "euphonium"
+        },
+        "S04": {
+            "original_inst_class": "Strings (continued)",
+            "assigned_instrument": "euphonium"
+        },
+        "S05": {
+            "original_inst_class": "Strings (continued)",
+            "assigned_instrument": "french_horn"
+        },
+        "S06": {
+            "original_inst_class": "Brass",
+            "assigned_instrument": "euphonium"
+        },
+        "S07": {
+            "original_inst_class": "Pipe",
+            "assigned_instrument": "trumpet"
+        },
+        "S08": {
+            "original_inst_class": "Reed",
+            "assigned_instrument": "french_horn"
+        },
+        "S09": {
+            "original_inst_class": "Drums",
+            "assigned_instrument": "Drums"
+        },
+        "S10": {
+            "original_inst_class": "Piano",
+            "assigned_instrument": "trumpet"
+        },
+        "S11": {
+            "original_inst_class": "Strings",
+            "assigned_instrument": "french_horn"
+        },
+        "S12": {
+            "original_inst_class": "Strings",
+            "assigned_instrument": "tuba"
+        },
+        "S14": {
+            "original_inst_class": "Chromatic Percussion",
+            "assigned_instrument": "french_horn"
+        },
+        "S15": {
+            "original_inst_class": "Guitar",
+            "assigned_instrument": "euphonium"
+        }
+    }
+}

@@ -156,7 +156,7 @@ def process_track_folder(
     a dictionary of analysis results keyed by filename.
     """
     track_folder_name = os.path.basename(converted_track_folder_path)
-    output_folder_name = track_folder_name + "_features"
+    output_folder_name = track_folder_name
     output_folder_path = os.path.join(output_root, output_folder_name)
     os.makedirs(output_folder_path, exist_ok=True)
 
