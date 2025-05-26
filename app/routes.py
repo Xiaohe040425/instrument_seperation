@@ -11,6 +11,8 @@ from flask import (
     send_from_directory,
 )
 import os
+import time
+import threading
 from werkzeug.utils import secure_filename
 import json
 import shutil
@@ -20,6 +22,22 @@ from app.utils import allowed_file, generate_job_id, get_file_size, get_formatte
 
 # 建立藍圖
 main_bp = Blueprint("main", __name__)
+job_progress = {}
+
+
+# 在routes.py中添加清理函數
+def cleanup_job_progress(job_id, delay=60):
+    """延遲清理工作進度資訊"""
+
+    def cleanup():
+        time.sleep(delay)
+        if job_id in job_progress:
+            del job_progress[job_id]
+            print(f"清理工作進度資訊: {job_id}")
+
+    cleanup_thread = threading.Thread(target=cleanup)
+    cleanup_thread.daemon = True
+    cleanup_thread.start()
 
 
 @main_bp.route("/")
@@ -34,7 +52,6 @@ def health_check():
     return jsonify({"status": "ok", "message": "系統正常運作中"})
 
 
-@main_bp.route("/upload", methods=["POST"])
 @main_bp.route("/upload", methods=["POST"])
 def upload_file():
     """處理檔案上傳"""
@@ -193,53 +210,196 @@ def convert_file(job_id):
     with open(job_info_path, "r", encoding="utf-8") as f:
         job_info = json.load(f)
 
-    # 模擬轉換過程
-    # 實際應用中，這裡會呼叫您的後端模組對每個檔案進行處理
-
-    # 模擬分析結果
-    analysis_result = {
-        "job_id": job_id,
-        "completion_time": get_formatted_time(),
-        "file_count": len(job_info["files"]),
-        "track_count": 5,  # 假設值
-        "duration": 180,  # 秒
-        "difficulty": 7,  # 1-10
-        "tracks": [
-            {"name": "主旋律", "instrument": "Trumpet1", "role": "主旋律", "score": 9},
-            {"name": "和聲1", "instrument": "Trombone", "role": "和弦墊底", "score": 8},
-            {"name": "和聲2", "instrument": "Horn", "role": "和弦墊底", "score": 7},
-            {
-                "name": "低音部",
-                "instrument": "Tuba",
-                "role": "主律動（基底）",
-                "score": 9,
-            },
-            {"name": "打擊樂", "instrument": "Drums", "role": "節奏樂器", "score": 8},
-        ],
-        "files": job_info["files"],  # 保存原始檔案資訊
+    # 初始化進度追蹤
+    job_progress[job_id] = {
+        "status": "processing",
+        "progress": 0,
+        "stage": "初始化中...",
     }
 
-    # 保存分析結果
-    results_dir = os.path.join(current_app.config["DOWNLOAD_FOLDER"], job_id)
-    os.makedirs(results_dir, exist_ok=True)
+    # 獲取當前Flask應用實例
+    app = current_app._get_current_object()
 
-    with open(
-        os.path.join(results_dir, "analysis_result.json"), "w", encoding="utf-8"
-    ) as f:
-        json.dump(analysis_result, f, ensure_ascii=False, indent=4)
+    # 在背景執行轉換過程
+    def background_conversion():
+        try:
+            # 在背景線程中設置應用上下文
+            with app.app_context():
+                stages = [
+                    {"progress": 10, "stage": "分析音檔結構..."},
+                    {"progress": 25, "stage": "提取音樂特徵..."},
+                    {"progress": 45, "stage": "分配管樂器..."},
+                    {"progress": 65, "stage": "生成MIDI檔案..."},
+                    {"progress": 80, "stage": "轉換音頻格式..."},
+                    {"progress": 95, "stage": "整合混音結果..."},
+                    {"progress": 100, "stage": "轉換完成"},
+                ]
 
-    # 更新工作狀態
-    job_info["status"] = "converted"
+                for stage in stages:
+                    time.sleep(1.2)  # 每個階段延遲1.2秒，總共約8.4秒
+                    job_progress[job_id]["progress"] = stage["progress"]
+                    job_progress[job_id]["stage"] = stage["stage"]
+                    print(f"Job {job_id}: {stage['progress']}% - {stage['stage']}")
 
-    with open(job_info_path, "w", encoding="utf-8") as f:
-        json.dump(job_info, f, ensure_ascii=False, indent=4)
+                # 準備輸出檔案列表（根據您的實際檔案）
+                output_tracks = [
+                    {
+                        "name": "S00_French_Horn.MIDI",
+                        "instrument": "S00_French_Horn",
+                        "type": "MIDI",
+                        "role": "法國號",
+                        "score": 9,
+                    },
+                    {
+                        "name": "S00_French_Horn.WAV",
+                        "instrument": "S00_French_Horn",
+                        "type": "WAV",
+                        "role": "法國號",
+                        "score": 9,
+                    },
+                    {
+                        "name": "S01_Tuba.MIDI",
+                        "instrument": "S01_Tuba",
+                        "type": "MIDI",
+                        "role": "低音號",
+                        "score": 8,
+                    },
+                    {
+                        "name": "S01_Tuba.WAV",
+                        "instrument": "S01_Tuba",
+                        "type": "WAV",
+                        "role": "低音號",
+                        "score": 8,
+                    },
+                    {
+                        "name": "S02_Trumpet.MIDI",
+                        "instrument": "S02_Trumpet",
+                        "type": "MIDI",
+                        "role": "小號",
+                        "score": 9,
+                    },
+                    {
+                        "name": "S02_Trumpet.WAV",
+                        "instrument": "S02_Trumpet",
+                        "type": "WAV",
+                        "role": "小號",
+                        "score": 9,
+                    },
+                    {
+                        "name": "S03_Trumpet.MIDI",
+                        "instrument": "S03_Trumpet",
+                        "type": "MIDI",
+                        "role": "小號2",
+                        "score": 8,
+                    },
+                    {
+                        "name": "S03_Trumpet.WAV",
+                        "instrument": "S03_Trumpet",
+                        "type": "WAV",
+                        "role": "小號2",
+                        "score": 8,
+                    },
+                    {
+                        "name": "S08.MIDI",
+                        "instrument": "S08",
+                        "type": "MIDI",
+                        "role": "特殊音軌",
+                        "score": 7,
+                    },
+                    {
+                        "name": "S08.WAV",
+                        "instrument": "S08",
+                        "type": "WAV",
+                        "role": "特殊音軌",
+                        "score": 7,
+                    },
+                    {
+                        "name": "mix.MIDI",
+                        "instrument": "mix",
+                        "type": "MIDI",
+                        "role": "混音",
+                        "score": 10,
+                    },
+                    {
+                        "name": "mix.WAV",
+                        "instrument": "mix",
+                        "type": "WAV",
+                        "role": "混音",
+                        "score": 10,
+                    },
+                ]
 
-    return jsonify({"status": "success", "message": "轉換完成"})
+                # 模擬分析結果
+                analysis_result = {
+                    "job_id": job_id,
+                    "completion_time": get_formatted_time(),
+                    "file_count": len(job_info["files"]),
+                    "track_count": len(output_tracks),
+                    "duration": 180,
+                    "difficulty": 7,
+                    "tracks": output_tracks,
+                    "files": job_info["files"],
+                }
+
+                # 保存分析結果
+                results_dir = os.path.join(
+                    current_app.config["DOWNLOAD_FOLDER"], job_id
+                )
+                os.makedirs(results_dir, exist_ok=True)
+
+                with open(
+                    os.path.join(results_dir, "analysis_result.json"),
+                    "w",
+                    encoding="utf-8",
+                ) as f:
+                    json.dump(analysis_result, f, ensure_ascii=False, indent=4)
+
+                # 更新工作狀態
+                job_info["status"] = "converted"
+                with open(job_info_path, "w", encoding="utf-8") as f:
+                    json.dump(job_info, f, ensure_ascii=False, indent=4)
+
+                # 標記為完成
+                job_progress[job_id]["status"] = "completed"
+                print(f"Job {job_id}: 轉換完成")
+
+                # 60秒後清理進度資訊
+                cleanup_job_progress(job_id, 60)
+
+        except Exception as e:
+            print(f"背景轉換過程發生錯誤: {e}")
+            job_progress[job_id]["status"] = "error"
+            job_progress[job_id]["stage"] = f"處理失敗: {str(e)}"
+            job_progress[job_id]["message"] = str(e)
+
+    # 啟動背景線程
+    conversion_thread = threading.Thread(target=background_conversion)
+    conversion_thread.daemon = True
+    conversion_thread.start()
+
+    return jsonify({"status": "success", "message": "開始轉換處理"})
 
 
 @main_bp.route("/api/status/<job_id>")
 def get_job_status(job_id):
     """獲取工作狀態"""
+    # 如果有進度追蹤資訊，優先使用
+    if job_id in job_progress:
+        progress_info = job_progress[job_id]
+        response_data = {
+            "status": progress_info["status"],
+            "progress": progress_info["progress"],
+            "stage": progress_info.get("stage", "處理中..."),
+            "job_id": job_id,
+        }
+
+        # 如果有錯誤，添加錯誤信息
+        if progress_info["status"] == "error":
+            response_data["message"] = progress_info.get("message", "未知錯誤")
+
+        return jsonify(response_data)
+
+    # 否則使用原來的檔案檢查邏輯
     job_dir = os.path.join(current_app.config["UPLOAD_FOLDER"], job_id)
     job_info_path = os.path.join(job_dir, "job_info.json")
 
@@ -254,18 +414,9 @@ def get_job_status(job_id):
     if os.path.exists(results_dir) and os.path.exists(
         os.path.join(results_dir, "analysis_result.json")
     ):
-        progress = 100
-        status = "completed"
+        return jsonify({"status": "completed", "progress": 100, "job_id": job_id})
     else:
-        # 模擬進度
-        if job_info["status"] == "uploaded":
-            progress = 0
-            status = "waiting"
-        else:
-            progress = 50  # 假設進度
-            status = "processing"
-
-    return jsonify({"status": status, "progress": progress, "job_id": job_id})
+        return jsonify({"status": "waiting", "progress": 0, "job_id": job_id})
 
 
 @main_bp.route("/statistic/<job_id>/<chart_type>")
@@ -279,33 +430,84 @@ def statistic_page(job_id, chart_type):
         flash("找不到工作資訊或分析結果", "danger")
         return redirect(url_for("main.index"))
 
-    # 可用的圖表類型
-    chart_types = [
-        {"id": "breathing", "name": "換氣頓點圖"},
-        {"id": "difficulty", "name": "難度分析圖"},
-        {"id": "technical", "name": "技術曲線圖"},
+    # 直接使用圖表檔案名稱作為選項
+    chart_files = [
+        {
+            "id": "S00_breathing",
+            "filename": "S00_breathing.png",
+            "display_name": "S00_breathing.png",
+        },
+        {
+            "id": "S00_difficulty",
+            "filename": "S00_difficulty.png",
+            "display_name": "S00_difficulty.png",
+        },
+        {
+            "id": "S01_breathing",
+            "filename": "S01_breathing.png",
+            "display_name": "S01_breathing.png",
+        },
+        {
+            "id": "S01_difficulty",
+            "filename": "S01_difficulty.png",
+            "display_name": "S01_difficulty.png",
+        },
+        {
+            "id": "S03_breathing",
+            "filename": "S03_breathing.png",
+            "display_name": "S03_breathing.png",
+        },
+        {
+            "id": "S03_difficulty",
+            "filename": "S03_difficulty.png",
+            "display_name": "S03_difficulty.png",
+        },
     ]
 
     # 檢查選擇的圖表類型是否有效
-    if chart_type not in [c["id"] for c in chart_types]:
-        chart_type = "breathing"  # 預設圖表類型
+    valid_chart_ids = [c["id"] for c in chart_files]
+    if chart_type not in valid_chart_ids:
+        chart_type = "S00_breathing"  # 預設圖表
+
+    # 找到當前選擇的圖表
+    current_chart = next(
+        (c for c in chart_files if c["id"] == chart_type), chart_files[0]
+    )
 
     return render_template(
-        "statistic.html", job_id=job_id, chart_type=chart_type, chart_types=chart_types
+        "statistic.html",
+        job_id=job_id,
+        chart_type=chart_type,
+        chart_files=chart_files,
+        current_chart=current_chart,
     )
 
 
 @main_bp.route("/api/charts/<job_id>/<chart_type>")
 def get_chart(job_id, chart_type):
     """獲取圖表數據API"""
-    # 實際應用中，這裡會從您的後端獲取實際的圖表數據或圖片
-    # 目前我們只返回一些佔位圖片或數據
 
-    # 模擬返回圖片URL
-    chart_url = f"/static/img/placeholder_{chart_type}.png"
+    # 圖表檔案映射
+    chart_file_mapping = {
+        "S00_breathing": "S00_breathing.png",
+        "S00_difficulty": "S00_difficulty.png",
+        "S01_breathing": "S01_breathing.png",
+        "S01_difficulty": "S01_difficulty.png",
+        "S03_breathing": "S03_breathing.png",
+        "S03_difficulty": "S03_difficulty.png",
+    }
+
+    # 獲取對應的圖表檔案
+    chart_filename = chart_file_mapping.get(chart_type, "S00_breathing.png")
+    chart_url = f"/static/img/{chart_filename}"
 
     return jsonify(
-        {"status": "success", "chart_url": chart_url, "chart_type": chart_type}
+        {
+            "status": "success",
+            "chart_url": chart_url,
+            "chart_type": chart_type,
+            "chart_file": chart_filename,
+        }
     )
 
 
@@ -324,26 +526,45 @@ def download_results(job_id):
         flash("找不到分析結果", "danger")
         return redirect(url_for("main.result_page", job_id=job_id))
 
-    # 創建臨時目錄來存放MIDI檔案
-    temp_dir = os.path.join(results_dir, "temp_midi")
+    # 創建臨時目錄來存放檔案
+    temp_dir = os.path.join(results_dir, "temp_output")
     os.makedirs(temp_dir, exist_ok=True)
 
     try:
-        # 讀取分析結果
-        with open(analysis_path, "r", encoding="utf-8") as f:
-            analysis_result = json.load(f)
+        # Demo檔案來源目錄
+        demo_files_dir = os.path.join(current_app.root_path, "demo_files")
 
-        # 為每個軌道創建模擬MIDI檔案
-        for track in analysis_result.get("tracks", []):
-            midi_filename = f"{track['instrument']}.MIDI"
-            midi_path = os.path.join(temp_dir, midi_filename)
+        # 要複製的檔案列表（根據您的實際檔案）
+        demo_files = [
+            "S00_French_Horn.mid",
+            "S00_French_Horn.wav",
+            "S01_Tuba.mid",
+            "S01_Tuba.wav",
+            "S02_Trumpet.mid",
+            "S02_Trumpet.wav",
+            "S03_Trumpet.wav",
+            "S08.mid",
+            "S08.wav",
+            "mix.mid",
+            "mix.wav",
+        ]
 
-            # 創建簡單的示例MIDI檔案
-            with open(midi_path, "w") as f:
-                f.write(f"This is a placeholder for {midi_filename}")
+        # 複製所有demo檔案到臨時目錄
+        for filename in demo_files:
+            demo_path = os.path.join(demo_files_dir, filename)
+            output_path = os.path.join(temp_dir, filename)
+
+            if os.path.exists(demo_path):
+                shutil.copy2(demo_path, output_path)
+                print(f"複製檔案: {filename}")
+            else:
+                # 如果demo檔案不存在，創建一個佔位檔案
+                with open(output_path, "w") as f:
+                    f.write(f"Demo output for {filename}")
+                print(f"創建佔位檔案: {filename}")
 
         # 創建ZIP文件
-        zip_filename = f"converted_files_{job_id}.zip"
+        zip_filename = f"converted_results_{job_id}.zip"
         zip_path = os.path.join(current_app.config["DOWNLOAD_FOLDER"], zip_filename)
 
         # 刪除已存在的ZIP檔案（如果有）
@@ -358,6 +579,8 @@ def download_results(job_id):
             flash("創建ZIP檔案失敗", "danger")
             return redirect(url_for("main.result_page", job_id=job_id))
 
+        print(f"ZIP檔案創建成功: {zip_filename}")
+
         # 提供ZIP檔案下載
         return send_from_directory(
             directory=os.path.dirname(zip_path),
@@ -367,7 +590,7 @@ def download_results(job_id):
         )
 
     except Exception as e:
-        # 捕獲並顯示任何錯誤
+        print(f"下載處理錯誤: {e}")
         flash(f"下載處理過程中發生錯誤: {str(e)}", "danger")
         return redirect(url_for("main.result_page", job_id=job_id))
 

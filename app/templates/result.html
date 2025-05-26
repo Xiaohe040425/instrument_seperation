@@ -78,9 +78,10 @@
                 
                 {% if output_files %}
                 <div style="margin-top: 30px; text-align: center;">
-                    <a href="{{ url_for('main.download_results', job_id=job_id) }}" class="btn">下載檔案</a>
+                    <button id="download-btn" class="btn" onclick="downloadFiles('{{ job_id }}')">下載檔案</button>
+                    <div id="download-status" style="margin-top: 10px; font-style: italic; color: #666;"></div>
                 </div>
-                {% endif %}
+                {% endif %} 
             </div>
         </div>
     </div>
@@ -96,6 +97,43 @@
     console.log("Job ID:", jobId);
     console.log("Initial progress:", progress);
     console.log("Start button found:", !!startConvertBtn);
+    
+    // 下載函數 - 將此函數放在腳本的開始部分
+    function downloadFiles(jobId) {
+        const downloadBtn = document.getElementById('download-btn');
+        const downloadStatus = document.getElementById('download-status');
+        
+        // 禁用按鈕並顯示準備狀態
+        downloadBtn.disabled = true;
+        downloadBtn.textContent = '準備下載中...';
+        downloadStatus.textContent = '正在準備您的檔案...';
+        downloadStatus.style.color = '#0066cc';
+        
+        // 創建隱藏的下載連結
+        const downloadLink = document.createElement('a');
+        downloadLink.href = '/download/' + jobId;
+        downloadLink.style.display = 'none';
+        document.body.appendChild(downloadLink);
+        
+        // 觸發下載
+        downloadLink.click();
+        
+        // 模擬下載完成（因為無法直接檢測下載狀態，使用定時器）
+        setTimeout(() => {
+            downloadBtn.disabled = false;
+            downloadBtn.textContent = '下載檔案';
+            downloadStatus.textContent = '✓ 下載完成！請檢查您的下載資料夾。';
+            downloadStatus.style.color = '#28a745';
+            
+            // 3秒後清除狀態訊息
+            setTimeout(() => {
+                downloadStatus.textContent = '';
+            }, 3000);
+            
+            // 清理DOM
+            document.body.removeChild(downloadLink);
+        }, 2000); // 2秒後顯示下載完成
+    }
     
     // 如果進度尚未完成，設置開始轉換按鈕事件
     if (progress < 100 && startConvertBtn) {
@@ -170,26 +208,55 @@
                 if (data.status === 'error') {
                     clearInterval(interval);
                     console.error("Error checking progress:", data.message);
-                    alert('發生錯誤：' + data.message);
+                    statusTextElement.textContent = '轉換失敗';
+                    
+                    // 顯示具體錯誤信息
+                    const errorMessage = data.message || '未知錯誤';
+                    alert('轉換過程發生錯誤：' + errorMessage);
+                    
+                    // 重置按鈕狀態
+                    if (startConvertBtn) {
+                        startConvertBtn.disabled = false;
+                        startConvertBtn.textContent = '重新開始轉換';
+                    }
                     return;
                 }
                 
                 // 更新進度
-                progress = data.progress;
+                progress = data.progress || 0;
                 progressElement.style.width = progress + '%';
                 progressTextElement.textContent = progress + '% 已完成';
                 
+                // 更新狀態文字（如果有階段資訊）
+                if (data.stage) {
+                    statusTextElement.textContent = data.stage;
+                } else if (progress < 100) {
+                    statusTextElement.textContent = '轉換中...';
+                }
+                
                 // 如果完成，重新載入頁面顯示結果
-                if (data.status === 'completed') {
+                if (data.status === 'completed' || progress >= 100) {
                     console.log("Conversion completed, reloading page");
                     clearInterval(interval);
-                    window.location.reload();
+                    statusTextElement.textContent = '轉換完成！即將刷新頁面...';
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500); // 延遲1.5秒再重載，讓用戶看到完成狀態
                 }
             })
             .catch(error => {
                 console.error('監控進度時發生錯誤：', error);
+                clearInterval(interval);
+                statusTextElement.textContent = '監控進度時發生錯誤';
+                alert('監控進度時發生錯誤：' + error.message);
+                
+                // 重置按鈕狀態
+                if (startConvertBtn) {
+                    startConvertBtn.disabled = false;
+                    startConvertBtn.textContent = '重新開始轉換';
+                }
             });
-        }, 1000);
+        }, 800); // 每0.8秒檢查一次進度
     }
 </script>
 </body>

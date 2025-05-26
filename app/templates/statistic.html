@@ -32,10 +32,10 @@
             <!-- 左側：圖表選單 -->
             <div class="chart-menu">
                 <h3 class="section-title">分析圖表</h3>
-                {% for chart in chart_types %}
+                {% for chart in chart_files %}
                 <a href="{{ url_for('main.statistic_page', job_id=job_id, chart_type=chart.id) }}" 
                    class="chart-button {% if chart_type == chart.id %}active{% endif %}">
-                    {{ chart.name }}
+                    {{ chart.display_name }}
                 </a>
                 {% endfor %}
             </div>
@@ -43,8 +43,12 @@
             <!-- 右側：圖表顯示 -->
             <div class="chart-display">
                 <div id="chart-container">
+                    <h4 id="chart-title">{{ current_chart.display_name }}</h4>
                     <!-- 這裡將顯示圖表 -->
                     <img id="chart-image" src="" alt="分析圖表" style="width: 100%; height: auto;">
+                    <div id="chart-info" style="margin-top: 10px; font-size: 12px; color: #666; text-align: center;">
+                        檔案名稱：<span id="chart-filename" style="font-family: monospace;"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,13 +68,21 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
+                    // 更新圖表圖片
                     document.getElementById('chart-image').src = data.chart_url;
+                    
+                    // 更新檔案名稱顯示
+                    document.getElementById('chart-filename').textContent = data.chart_file;
+                    
+                    console.log('載入圖表:', data.chart_file);
                 } else {
-                    alert('載入圖表失敗：' + data.message);
+                    console.error('載入圖表失敗:', data.message);
+                    alert('載入圖表失敗：' + (data.message || '未知錯誤'));
                 }
             })
             .catch(error => {
                 console.error('載入圖表時發生錯誤：', error);
+                alert('載入圖表時發生錯誤：' + error.message);
             });
         }
     </script>
