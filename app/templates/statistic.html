@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數據分析 - 流行樂轉管樂譜系統</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+<body>
+    <!-- 頂部導航欄 -->
+    <div class="navbar">
+        <div class="navbar-title">
+            <a href="{{ url_for('main.result_page', job_id=job_id) }}" style="color: white; text-decoration: none;">
+                <i class="fas fa-arrow-left" style="margin-right: 10px;"></i>流行樂轉管樂譜系統
+            </a>
+        </div>
+        <div class="navbar-controls">
+            <button class="icon-button"><i class="fas fa-exclamation-triangle"></i></button>
+            <button class="icon-button"><i class="fas fa-cog"></i></button>
+            <button class="icon-button"><i class="fas fa-expand"></i></button>
+        </div>
+    </div>
+
+    <!-- 主要內容 -->
+    <div class="main-container" style="padding-top: 20px;">
+        <a href="{{ url_for('main.index') }}" class="back-button">
+            <i class="fas fa-arrow-left"></i> 回主畫面
+        </a>
+        
+        <div class="statistic-layout">
+            <!-- 左側：圖表選單 -->
+            <div class="chart-menu">
+                <h3 class="section-title">分析圖表</h3>
+                {% for chart in chart_types %}
+                <a href="{{ url_for('main.statistic_page', job_id=job_id, chart_type=chart.id) }}" 
+                   class="chart-button {% if chart_type == chart.id %}active{% endif %}">
+                    {{ chart.name }}
+                </a>
+                {% endfor %}
+            </div>
+            
+            <!-- 右側：圖表顯示 -->
+            <div class="chart-display">
+                <div id="chart-container">
+                    <!-- 這裡將顯示圖表 -->
+                    <img id="chart-image" src="" alt="分析圖表" style="width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const jobId = "{{ job_id }}";
+        const chartType = "{{ chart_type }}";
+        
+        // 加載圖表
+        window.addEventListener('DOMContentLoaded', function() {
+            loadChart(chartType);
+        });
+        
+        function loadChart(type) {
+            fetch('/api/charts/' + jobId + '/' + type)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('chart-image').src = data.chart_url;
+                } else {
+                    alert('載入圖表失敗：' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('載入圖表時發生錯誤：', error);
+            });
+        }
+    </script>
+</body>
+</html>
