@@ -1,0 +1,256 @@
+/* 基本樣式設定 */
+body {
+    font-family: 'Microsoft JhengHei', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #faf5e4; /* 米色背景 */
+    color: #4e2e0b; /* 深褐色文字 */
+}
+
+/* 頂部導航欄 */
+.navbar {
+    background-color: #53341e; /* 深褐色導航欄 */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* 主要容器 */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 60px);
+    padding: 20px;
+}
+
+/* 頁面標題 */
+.page-title {
+    color: #53341e;
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* 卡片樣式 */
+.card {
+    background-color: #53341e;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: white;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+/* 拖放區域 */
+.drop-zone {
+    background-color: #53341e;
+    border: 2px dashed #faf5e4;
+    border-radius: 5px;
+    padding: 60px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.drop-zone:hover {
+    background-color: #634530;
+}
+
+.drop-zone-text {
+    font-size: 1.2em;
+    margin-bottom: 0;
+}
+
+.file-format-info {
+    margin-top: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* 按鈕樣式 */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #53341e;
+    color: white;
+    border: 2px solid #faf5e4;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: #faf5e4;
+    color: #53341e;
+}
+
+/* 結果頁面樣式 */
+.result-layout {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.file-list {
+    background-color: #53341e;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+}
+
+.conversion-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+}
+
+.progress-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #53341e;
+    width: 0%;
+    transition: width 0.5s;
+}
+
+.file-item {
+    background-color: #faf5e4;
+    color: #53341e;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.section-title {
+    color: #faf5e4;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* 統計頁面樣式 */
+.chart-menu {
+    background-color: #53341e;
+    border-radius: 10px;
+    padding: 20px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.chart-button {
+    background-color: #faf5e4;
+    color: #53341e;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    width: 85%;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.chart-button:hover {
+    background-color: #e9e0c9;
+}
+
+.chart-button.active {
+    background-color: #e9d8a6;
+    font-weight: bold;
+    border-left: 4px solid #53341e;
+}
+
+/* 確保統計頁面佈局正確 */
+.statistic-layout {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+.chart-display {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    flex-grow: 1;
+    width: 70%;
+}
+
+.back-button {
+    background-color: #53341e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.back-button:hover {
+    background-color: #634530;
+}
+
+/* 輔助類 */
+.hidden {
+    display: none;
+}
+
+.text-center {
+    text-align: center;
+}
